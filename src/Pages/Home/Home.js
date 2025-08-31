@@ -1,7 +1,14 @@
 import React from "react";
+import { ReactSlickSlider } from "../../Components";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
 
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <Box sx={{ height: "76vh" }}>
+      <ReactSlickSlider />
+    </Box>
+  );
 };
 
 export default Home;

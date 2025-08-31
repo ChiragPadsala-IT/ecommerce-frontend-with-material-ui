@@ -1,15 +1,15 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
+// import Box from "@mui/material/Box";
+// import Toolbar from "@mui/material/Toolbar";
+// import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+// import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
+// import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import FormControl from "@mui/material/FormControl";
@@ -20,9 +20,11 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import { categories } from "../../Constants/categories";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+// const pages = ["Products", "Pricing", "Blog"];
+// const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -87,7 +89,7 @@ const Header = () => {
   //   setAnchorElUser(null);
   // };
 
-  const [country, setCountry] = React.useState("US");
+  const [country, setCountry] = React.useState("");
 
   const selectCountryHandler = (e) => {
     e.preventDefault();
@@ -101,11 +103,14 @@ const Header = () => {
 
   return (
     <AppBar
+      position="static"
+      elevation={1}
+      sx={{ py: 2, px: 2 }}
       style={{
         background: "white",
-        boxShadow: "none",
+        // boxShadow: "1px",
         color: "black",
-        borderBottom: "1px solid hsla(0, 11%, 28%, 1.00)",
+        // borderBottom: "0.1px solid black",
         display: "flex",
         alignItems: "center",
       }}
@@ -129,6 +134,7 @@ const Header = () => {
             <Typography>Logo</Typography>
           </Container>
         </Grid>
+
         <Grid
           size={{
             sm: 4,
@@ -154,12 +160,10 @@ const Header = () => {
               </InputLabel>
               <Select
                 lable="Select Country"
-                value={""}
+                value={country}
                 onChange={selectCountryHandler}
               >
-                <MenuItem value={"US"}>
-                  <em>US</em>
-                </MenuItem>
+                <MenuItem value={"US"}>US</MenuItem>
                 <MenuItem value={"Canada"}>Canada</MenuItem>
                 <MenuItem value={"India"}>India</MenuItem>
                 <MenuItem value={"Australia"}>Australia</MenuItem>
@@ -167,6 +171,7 @@ const Header = () => {
             </FormControl>
           </Container>
         </Grid>
+
         <Grid
           size={{
             sm: 4,
@@ -185,6 +190,7 @@ const Header = () => {
             </Search>
           </Container>
         </Grid>
+
         <Grid
           size={{
             sm: 2,
@@ -197,11 +203,53 @@ const Header = () => {
               // border: "1px solid black",
               justifyContent: "end",
               alignItems: "center",
+              padding: "0px",
             }}
           >
             <ShoppingCartCheckoutIcon sx={{ mr: "1rem" }} />
-            <Avatar style={{ background: "none", color: "black" }} />
+            <Avatar
+              style={{
+                background: "none",
+                color: "black",
+                margin: 0,
+              }}
+            />
           </Container>
+        </Grid>
+      </Grid>
+
+      <Grid container sx={{ width: "100%", mt: 1 }}>
+        <Grid size={{ xs: 6, sm: 4 }}>
+          <Button
+            variant="outlined"
+            sx={{ padding: 1, borderRadius: 5, px: 2 }}
+          >
+            <MenuIcon sx={{ mr: 1 }} />
+            ALL CATEGORIES
+          </Button>
+        </Grid>
+        <Grid
+          size={{ xs: 6, sm: 8 }}
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            // background: "yellow",
+          }}
+        >
+          {categories.map((r, index) => (
+            <Link
+              sx={{
+                textDecoration: "none",
+                color: "black",
+                cursor: "pointer",
+                ":hover": { background: "#a6b9cc6c" },
+                padding: "0.5rem 1rem",
+                borderRadius: 5,
+              }}
+            >
+              {r.name}
+            </Link>
+          ))}
         </Grid>
       </Grid>
     </AppBar>

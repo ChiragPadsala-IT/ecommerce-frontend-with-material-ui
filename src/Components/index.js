@@ -1,3 +1,4 @@
 import Header from "./Header/Header";
+import ReactSlickSlider from "./ReactSlickSlider";
 
-export { Header };
+export { Header, ReactSlickSlider };
