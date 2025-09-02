@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactSlickSlider } from "../../Components";
+import { BestSeller, ReactSlickSlider } from "../../Components";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
@@ -7,6 +7,8 @@ const Home = () => {
   return (
     <Box sx={{ height: "76vh" }}>
       <ReactSlickSlider />
+
+      <BestSeller />
     </Box>
   );
 };

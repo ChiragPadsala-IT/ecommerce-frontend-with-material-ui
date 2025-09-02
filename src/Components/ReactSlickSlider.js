@@ -27,7 +27,7 @@ const ReactSlickSlider = () => {
   return (
     <Box
       sx={{
-        height: "10rem",
+        height: "35vw",
         width: "100%",
         background: "yellow",
         display: "display",
@@ -36,7 +36,7 @@ const ReactSlickSlider = () => {
     >
       <Slider {...settings}>
         {sliderImg.map((r, index) => (
-          <Box key={index} sx={{ height: "20vw", width: "100%" }}>
+          <Box key={index} sx={{ height: "35vw", width: "100%" }}>
             <img
               src={r.url}
               alt="Slider Img"

@@ -22,6 +22,7 @@ import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { categories } from "../../Constants/categories";
+import Box from "@mui/material/Box";
 
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -90,6 +91,7 @@ const Header = () => {
   // };
 
   const [country, setCountry] = React.useState("");
+  const [isAllCategoriesOpen, setIsAllCategoriesOpen] = React.useState(false);
 
   const selectCountryHandler = (e) => {
     e.preventDefault();
@@ -99,6 +101,12 @@ const Header = () => {
     console.log(value);
 
     setCountry(value);
+  };
+
+  const isAllCategoriesOpenHandler = (e, value) => {
+    e.preventDefault();
+
+    setIsAllCategoriesOpen(value);
   };
 
   return (
@@ -222,11 +230,42 @@ const Header = () => {
         <Grid size={{ xs: 6, sm: 4 }}>
           <Button
             variant="outlined"
-            sx={{ padding: 1, borderRadius: 5, px: 2 }}
+            sx={{
+              // padding: 1,
+              borderRadius: 5,
+              // px: 2,
+              height: "100%",
+              width: "40%",
+            }}
+            onClick={(e) => isAllCategoriesOpenHandler(e, !isAllCategoriesOpen)}
+            // onMouseEnter={(e) => isAllCategoriesOpenHandler(e, true)}
+            // onMouseOut={(e) => isAllCategoriesOpenHandler(e, false)}
           >
-            <MenuIcon sx={{ mr: 1 }} />
-            ALL CATEGORIES
+            <MenuIcon sx={{ mr: 1, fontSize: "1.2rem" }} />
+            <Typography sx={{ fontSize: "0.7rem" }}>ALL CATEGORIES</Typography>
           </Button>
+
+          <Box
+            sx={{
+              background: "white",
+              width: { xs: "50%", sm: "17vw" },
+              padding: "1em",
+              position: "absolute",
+              zIndex: "100",
+              display: isAllCategoriesOpen ? "flex" : "none",
+              flexDirection: "column",
+              top: { xs: "7em", sm: "9em" },
+            }}
+          >
+            {categories.map((r, index) => (
+              <Link
+                key={index}
+                sx={{ textDecoration: "none", color: "black", mb: "0.5em" }}
+              >
+                {r.name}
+              </Link>
+            ))}
+          </Box>
         </Grid>
         <Grid
           size={{ xs: 6, sm: 8 }}
@@ -238,6 +277,7 @@ const Header = () => {
         >
           {categories.map((r, index) => (
             <Link
+              key={index}
               sx={{
                 textDecoration: "none",
                 color: "black",
