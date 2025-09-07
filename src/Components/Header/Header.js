@@ -1,15 +1,10 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
-// import Toolbar from "@mui/material/Toolbar";
-// import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-// import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-// import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import FormControl from "@mui/material/FormControl";
@@ -23,9 +18,6 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { categories } from "../../Constants/categories";
 import Box from "@mui/material/Box";
-
-// const pages = ["Products", "Pricing", "Blog"];
-// const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,7 +51,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
@@ -72,24 +63,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
-  // const [anchorElNav, setAnchorElNav] = React.useState(null);
-  // const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  // const handleOpenNavMenu = (event) => {
-  //   setAnchorElNav(event.currentTarget);
-  // };
-  // const handleOpenUserMenu = (event) => {
-  //   setAnchorElUser(event.currentTarget);
-  // };
-
-  // const handleCloseNavMenu = () => {
-  //   setAnchorElNav(null);
-  // };
-
-  // const handleCloseUserMenu = () => {
-  //   setAnchorElUser(null);
-  // };
-
   const [country, setCountry] = React.useState("");
   const [isAllCategoriesOpen, setIsAllCategoriesOpen] = React.useState(false);
 
@@ -116,9 +89,7 @@ const Header = () => {
       sx={{ py: 2, px: 2 }}
       style={{
         background: "white",
-        // boxShadow: "1px",
         color: "black",
-        // borderBottom: "0.1px solid black",
         display: "flex",
         alignItems: "center",
       }}
@@ -231,15 +202,11 @@ const Header = () => {
           <Button
             variant="outlined"
             sx={{
-              // padding: 1,
               borderRadius: 5,
-              // px: 2,
               height: "100%",
               width: "40%",
             }}
             onClick={(e) => isAllCategoriesOpenHandler(e, !isAllCategoriesOpen)}
-            // onMouseEnter={(e) => isAllCategoriesOpenHandler(e, true)}
-            // onMouseOut={(e) => isAllCategoriesOpenHandler(e, false)}
           >
             <MenuIcon sx={{ mr: 1, fontSize: "1.2rem" }} />
             <Typography sx={{ fontSize: "0.7rem" }}>ALL CATEGORIES</Typography>
@@ -272,7 +239,6 @@ const Header = () => {
           sx={{
             display: "flex",
             justifyContent: "start",
-            // background: "yellow",
           }}
         >
           {categories.map((r, index) => (
