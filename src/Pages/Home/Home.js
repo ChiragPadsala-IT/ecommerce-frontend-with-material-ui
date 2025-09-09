@@ -1,12 +1,13 @@
-import React from "react";
 import { BestSeller, ReactSlickSlider } from "../../Components";
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import HomeItemBarMenu from "../../Components/HomeItemBarMenu";
 
 const Home = () => {
   return (
     <Box sx={{ height: "76vh" }}>
       <ReactSlickSlider />
+
+      <HomeItemBarMenu />
 
       <BestSeller />
     </Box>

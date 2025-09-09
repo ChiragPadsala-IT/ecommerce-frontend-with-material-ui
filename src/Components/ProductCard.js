@@ -1,11 +1,18 @@
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
+import IconButton from "@mui/material/IconButton";
+import { useState } from "react";
 
 const ProductCard = (props) => {
+  const [isHover, setIsHover] = useState(false);
+
   return (
     <Box
+      onMouseEnter={() => setIsHover(!isHover)}
+      onMouseLeave={() => setIsHover(!isHover)}
       sx={{
         width: "100%",
         height: "100%",
@@ -31,6 +38,18 @@ const ProductCard = (props) => {
             width: "50%",
           }}
         />
+        {isHover ? (
+          <>
+            <IconButton sx={{ position: "absolute", top: "4%", right: "7%" }}>
+              <FavoriteBorderIcon />
+            </IconButton>
+            <IconButton sx={{ position: "absolute", top: "15%", right: "7%" }}>
+              <ZoomOutMapIcon />
+            </IconButton>
+          </>
+        ) : (
+          <></>
+        )}
       </Box>
       <Box sx={{ p: "0.7em" }}>
         <Typography variant="h6">{props.name}</Typography>

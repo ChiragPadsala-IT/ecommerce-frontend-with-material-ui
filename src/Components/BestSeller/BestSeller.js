@@ -1,10 +1,7 @@
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import { Box, flex, height } from "@mui/system";
-import React from "react";
+import { Box } from "@mui/system";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Rating from "@mui/material/Rating";
 import ProductCard from "../ProductCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -120,7 +117,7 @@ const BestSeller = () => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 4,
+      items: 2,
     },
   };
 
@@ -131,7 +128,7 @@ const BestSeller = () => {
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
         width: "100%",
-        height: "30vw",
+        // height: "30vw",
       }}
     >
       <Box
@@ -154,9 +151,9 @@ const BestSeller = () => {
           display: "flex",
           flexDirection: "column",
           pl: "1em",
-          width: "75%",
+          pr: { xs: "1em", md: "0" },
+          width: { xs: "100%", md: "75%" },
           height: "100%",
-          // background: "yellow",
         }}
       >
         <Box
