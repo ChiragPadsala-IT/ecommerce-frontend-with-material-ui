@@ -1,5 +1,3 @@
-import Container from "@mui/material/Container";
-import React from "react";
 import Slider from "react-slick";
 import Box from "@mui/material/Box";
 
@@ -31,7 +29,7 @@ const ReactSlickSlider = () => {
   return (
     <Box
       sx={{
-        height: "35vw",
+        height: { xs: "50vw", sm: "35vw" },
         width: "100%",
         background: "yellow",
         display: "display",
@@ -40,12 +38,14 @@ const ReactSlickSlider = () => {
     >
       <Slider {...settings}>
         {sliderImg.map((r, index) => (
-          <Box key={index} sx={{ height: "35vw", width: "100%" }}>
+          <Box
+            key={index}
+            sx={{ height: { xs: "50vw", sm: "35vw" }, width: "100%" }}
+          >
             <img
               src={r.url}
               alt="Slider Img"
               style={{ width: "100%", height: "100%", objectFit: "fill" }}
-              // style={{ objectFit: "cover" }}
             />
           </Box>
         ))}
