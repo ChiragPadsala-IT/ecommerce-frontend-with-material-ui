@@ -47,7 +47,7 @@ const NewsLetter = () => {
         background: "rgba(42, 68, 152, 1)",
         // height: "30vw",
         py: "4em",
-        my: "4em",
+        mt: "4em",
         color: "white",
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
