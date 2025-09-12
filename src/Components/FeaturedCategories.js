@@ -6,7 +6,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { IconButton } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const HomeItemBarMenu = () => {
+const FeaturedCategories = () => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -26,15 +26,6 @@ const HomeItemBarMenu = () => {
   };
 
   return (
-    // <Box sx={{ display: "flex" }}>
-    // <Carousel responsive={responsive}>
-    //   <div style={{ height: "500px", width: "500px" }}>Item 1</div>
-    //   <div>Item 2</div>
-    //   <div>Item 3</div>
-    //   <div>Item 4</div>
-    // </Carousel>
-    // </Box>
-
     <Box
       sx={{
         display: "flex",
@@ -42,7 +33,6 @@ const HomeItemBarMenu = () => {
         flexDirection: "column",
         gap: 2,
         pl: "1em",
-        // pr: { xs: "1em", md: "0" },
       }}
     >
       <Box sx={{ fontSize: "1.5em", fontWeight: "500" }}>
@@ -111,4 +101,4 @@ const HomeItemBarMenu = () => {
   );
 };
 
-export default HomeItemBarMenu;
+export default FeaturedCategories;

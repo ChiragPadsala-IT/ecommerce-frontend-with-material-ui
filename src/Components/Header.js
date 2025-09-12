@@ -16,7 +16,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
-import { categories } from "../../Constants/categories";
+import { categories } from "../Constants/categories";
 import Box from "@mui/material/Box";
 
 const Search = styled("div")(({ theme }) => ({
@@ -265,67 +265,6 @@ const Header = () => {
           ))}
         </Box>
       </Box>
-      {/* <Grid container sx={{ width: "100%", mt: 1 }}>
-        <Grid size={{ xs: 6, sm: 4 }}>
-          <Button
-            variant="outlined"
-            sx={{
-              borderRadius: 5,
-              height: "100%",
-              width: "40%",
-            }}
-            onClick={(e) => isAllCategoriesOpenHandler(e, !isAllCategoriesOpen)}
-          >
-            <MenuIcon sx={{ mr: 1, fontSize: "1.2rem" }} />
-            <Typography sx={{ fontSize: "0.7rem" }}>ALL CATEGORIES</Typography>
-          </Button>
-
-          <Box
-            sx={{
-              background: "white",
-              width: { xs: "50%", sm: "17vw" },
-              padding: "1em",
-              position: "absolute",
-              zIndex: "100",
-              display: isAllCategoriesOpen ? "flex" : "none",
-              flexDirection: "column",
-              top: { xs: "7em", sm: "9em" },
-            }}
-          >
-            {categories.map((r, index) => (
-              <Link
-                key={index}
-                sx={{ textDecoration: "none", color: "black", mb: "0.5em" }}
-              >
-                {r.name}
-              </Link>
-            ))}
-          </Box>
-        </Grid>
-        <Grid
-          size={{ xs: 6, sm: 8 }}
-          sx={{
-            display: "flex",
-            justifyContent: "start",
-          }}
-        >
-          {categories.map((r, index) => (
-            <Link
-              key={index}
-              sx={{
-                textDecoration: "none",
-                color: "black",
-                cursor: "pointer",
-                ":hover": { background: "#a6b9cc6c" },
-                padding: "0.5rem 1rem",
-                borderRadius: 5,
-              }}
-            >
-              {r.name}
-            </Link>
-          ))}
-        </Grid>
-      </Grid> */}
     </AppBar>
   );
 };

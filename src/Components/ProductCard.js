@@ -5,14 +5,25 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const ProductCard = (props) => {
   const [isHover, setIsHover] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const isHoverHandler = (val) => setIsHover(val);
+
+  const isFavoriteHandler = (e) => {
+    e.preventDefault();
+
+    setIsFavorite(!isFavorite);
+  };
 
   return (
     <Box
-      onMouseEnter={() => setIsHover(!isHover)}
-      onMouseLeave={() => setIsHover(!isHover)}
+      onMouseEnter={() => isHoverHandler(true)}
+      onMouseLeave={() => isHoverHandler(false)}
+      on
       sx={{
         width: "100%",
         height: "100%",
@@ -40,8 +51,15 @@ const ProductCard = (props) => {
         />
         {isHover ? (
           <>
-            <IconButton sx={{ position: "absolute", top: "4%", right: "7%" }}>
-              <FavoriteBorderIcon />
+            <IconButton
+              sx={{ position: "absolute", top: "4%", right: "7%" }}
+              onClick={isFavoriteHandler}
+            >
+              {isFavorite ? (
+                <FavoriteIcon sx={{ color: "rgba(253, 71, 71, 1)" }} />
+              ) : (
+                <FavoriteBorderIcon />
+              )}
             </IconButton>
             <IconButton sx={{ position: "absolute", top: "15%", right: "7%" }}>
               <ZoomOutMapIcon />

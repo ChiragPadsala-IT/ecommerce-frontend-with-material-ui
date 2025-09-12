@@ -1,9 +1,10 @@
 import "react-multi-carousel/lib/styles.css";
-import HomePageSellingList from "../HomePageSellingList";
+import HomePageSellingList from "./HomePageSellingList";
 import { useEffect, useState } from "react";
 
 const BestSeller = () => {
   const [productList, setProductList] = useState([]);
+  const [advertiseImg, setAdvertiseImg] = useState("");
 
   useEffect(() => {
     const list = [
@@ -99,9 +100,19 @@ const BestSeller = () => {
       },
     ];
     setProductList([...list]);
+    setAdvertiseImg(
+      "https://www.shutterstock.com/shutterstock/photos/2661738301/display_1500/stock-vector--d-flash-sale-banner-with-september-number-on-podium-or-stage-isolated-on-background-with-2661738301.jpg"
+    );
   }, productList);
 
-  return <HomePageSellingList productList={productList} />;
+  return (
+    <HomePageSellingList
+      title="Best Seller"
+      desc="Do not miss the current offer until the end of the March."
+      productList={productList}
+      advertiseImg={advertiseImg}
+    />
+  );
 };
 
 export default BestSeller;

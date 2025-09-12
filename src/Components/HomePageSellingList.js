@@ -9,13 +9,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { IconButton } from "@mui/material";
 import ProductCard from "./ProductCard";
 
-const HomePageSellingList = (props) => {
-  const [productList, setProductList] = useState([]);
-
-  useEffect(() => {
-    setProductList(props.productList);
-  }, [props.productList]);
-
+const HomePageSellingList = ({ title, desc, productList, advertiseImg }) => {
   return (
     <Box
       sx={{
@@ -23,6 +17,7 @@ const HomePageSellingList = (props) => {
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
         width: "100%",
+        // position: "relative",
       }}
     >
       <Box
@@ -34,7 +29,7 @@ const HomePageSellingList = (props) => {
         }}
       >
         <img
-          src="https://www.shutterstock.com/shutterstock/photos/2661738301/display_1500/stock-vector--d-flash-sale-banner-with-september-number-on-podium-or-stage-isolated-on-background-with-2661738301.jpg"
+          src={advertiseImg}
           alt="Sale Image"
           style={{ width: "100%", height: "100%" }}
         />
@@ -57,13 +52,12 @@ const HomePageSellingList = (props) => {
             alignItems: "center",
             px: "5px",
             height: "20%",
+            mb: "2em",
           }}
         >
           <Box>
-            <Typography sx={{ fontSize: "2em" }}>BestSeller</Typography>
-            <Typography sx={{ fontWeight: "300" }}>
-              Do not miss the current offer until the end of the March
-            </Typography>
+            <Typography sx={{ fontSize: "2em" }}>{title}</Typography>
+            <Typography sx={{ fontWeight: "300" }}>{desc}</Typography>
           </Box>
           <Box>
             <Button variant="outlined">
