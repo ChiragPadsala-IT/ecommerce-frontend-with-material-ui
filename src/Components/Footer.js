@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import React from "react";
 import PercentIcon from "@mui/icons-material/Percent";
@@ -141,9 +141,33 @@ const Footer = () => {
             gap: { xs: 1, sm: 2 },
           }}
         >
-          <GitHubIcon />
-          <LinkedInIcon />
-          <InstagramIcon />
+          <IconButton
+            onClick={() => {}}
+            sx={{ cursor: "pointer", color: "white" }}
+            href="https://github.com/ChiragPadsala-IT?tab=repositories"
+            component="a"
+            target="_blank"
+          >
+            <GitHubIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {}}
+            sx={{ cursor: "pointer", color: "white" }}
+            href="https://www.linkedin.com/in/chirag-padsala-72ba161b5"
+            component="a"
+            target="_blank"
+          >
+            <LinkedInIcon />
+          </IconButton>
+          <IconButton
+            onClick={() => {}}
+            sx={{ cursor: "pointer", color: "white" }}
+            href="https://www.instagram.com/chiragpadsala38"
+            component="a"
+            target="_blank"
+          >
+            <InstagramIcon />
+          </IconButton>
         </Box>
       </Box>
     </Box>
