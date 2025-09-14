@@ -9,6 +9,7 @@ import FeaturedCategories from "./FeaturedCategories";
 import DiscountCard from "./DiscountCard";
 import NewsLetter from "./NewsLetter";
 import HomePageSellingList from "./HomePageSellingList";
+import ProductDetailsDialog from "./ProductDetailsDialog";
 
 export {
   Header,
@@ -22,4 +23,5 @@ export {
   Footer,
   CustomerCommentsCard,
   FeaturedCategories,
+  ProductDetailsDialog,
 };
