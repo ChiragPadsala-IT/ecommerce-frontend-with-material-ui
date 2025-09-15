@@ -11,6 +11,8 @@ import ProductDetailsDialog from "./ProductDetailsDialog";
 const ProductCard = (props) => {
   const [isHover, setIsHover] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isOpenProductDetailModel, setIsOpenProductDetailModel] =
+    useState(false);
 
   const isHoverHandler = (val) => setIsHover(val);
 
@@ -18,6 +20,10 @@ const ProductCard = (props) => {
     e.preventDefault();
 
     setIsFavorite(!isFavorite);
+  };
+
+  const onViewProductDetailsModelHandler = (val) => {
+    setIsOpenProductDetailModel(val);
   };
 
   return (
@@ -65,12 +71,7 @@ const ProductCard = (props) => {
               </IconButton>
               <IconButton
                 sx={{ position: "absolute", top: "15%", right: "7%" }}
-                // onClick={() => {
-                //   <ProductDetailsDialog
-                //     isOpen={true}
-                //     onDialogCloseHanlder={() => {}}
-                //   />;
-                // }}
+                onClick={() => onViewProductDetailsModelHandler(true)}
               >
                 <ZoomOutMapIcon />
               </IconButton>
@@ -114,7 +115,14 @@ const ProductCard = (props) => {
           </Box>
         </Box>
       </Box>
-      <ProductDetailsDialog />
+      {isOpenProductDetailModel && (
+        <ProductDetailsDialog
+          isOpen={isOpenProductDetailModel}
+          onDialogCloseHanlder={() => {
+            onViewProductDetailsModelHandler(false);
+          }}
+        />
+      )}
     </>
   );
 };
