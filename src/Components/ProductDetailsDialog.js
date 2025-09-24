@@ -28,6 +28,7 @@ const ProductDetailsDialog = ({
   onDialogCloseHanlder,
   productdetails,
   onAddToCartHandler,
+  onFavoriteHandler,
 }) => {
   const [imageShowNumber, setImageShowNumber] = useState(0);
   const [itemCount, setItemCount] = useState(1);
@@ -232,6 +233,7 @@ const ProductDetailsDialog = ({
               <Button
                 variant="outlined"
                 sx={{ display: "flex", gap: 1, p: "0.5em 1em" }}
+                onClick={onFavoriteHandler}
               >
                 <FavoriteIcon sx={{ fontSize: "1.5em" }} />
                 <Typography sx={{ fontSize: "0.9em" }}>

@@ -7,6 +7,7 @@ import {
   DiscountCard,
   CustomerCommentsCard,
   NewsLetter,
+  FilterProductDrawer,
 } from "../../Components";
 import Box from "@mui/material/Box";
 
@@ -15,6 +16,7 @@ const Home = () => {
     <Box sx={{ height: "100vh" }}>
       <ReactSlickSlider />
       <FeaturedCategories />
+      <FilterProductDrawer />
       <BestSeller />
       <NewProduct />
       <Box

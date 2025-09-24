@@ -10,9 +10,11 @@ import DiscountCard from "./DiscountCard";
 import NewsLetter from "./NewsLetter";
 import HomePageSellingList from "./HomePageSellingList";
 import ProductDetailsDialog from "./ProductDetailsDialog";
+import FilterProductDrawer from "./FilterProductDrawer";
 
 export {
   Header,
+  FilterProductDrawer,
   HomePageSellingList,
   NewsLetter,
   DiscountCard,

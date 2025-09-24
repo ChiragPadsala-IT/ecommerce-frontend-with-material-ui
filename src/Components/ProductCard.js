@@ -14,12 +14,17 @@ const ProductCard = ({ props }) => {
   const [isOpenProductDetailModel, setIsOpenProductDetailModel] =
     useState(false);
 
-  const isHoverHandler = (val) => setIsHover(val);
+  const onHoverHandler = (val) => setIsHover(val);
 
-  const isFavoriteHandler = (e) => {
+  const onFavoriteHandler = (e) => {
     e.preventDefault();
 
-    setIsFavorite(!isFavorite);
+    if (isOpenProductDetailModel) {
+      setIsOpenProductDetailModel(false);
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(!isFavorite);
+    }
   };
 
   const onViewProductDetailsModelHandler = (val) => {
@@ -39,8 +44,8 @@ const ProductCard = ({ props }) => {
   return (
     <>
       <Box
-        onMouseEnter={() => isHoverHandler(true)}
-        onMouseLeave={() => isHoverHandler(false)}
+        onMouseEnter={() => onHoverHandler(true)}
+        onMouseLeave={() => onHoverHandler(false)}
         on
         sx={{
           width: "100%",
@@ -71,7 +76,7 @@ const ProductCard = ({ props }) => {
             <>
               <IconButton
                 sx={{ position: "absolute", top: "4%", right: "7%" }}
-                onClick={isFavoriteHandler}
+                onClick={onFavoriteHandler}
               >
                 {isFavorite ? (
                   <FavoriteIcon sx={{ color: "rgba(253, 71, 71, 1)" }} />
@@ -131,6 +136,7 @@ const ProductCard = ({ props }) => {
           isOpen={isOpenProductDetailModel}
           onDialogCloseHanlder={onDialogCloseHanlder}
           onAddToCartHandler={onAddToCartHandler}
+          onFavoriteHandler={onFavoriteHandler}
         />
       )}
     </>
