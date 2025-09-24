@@ -8,7 +8,7 @@ import { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ProductDetailsDialog from "./ProductDetailsDialog";
 
-const ProductCard = (props) => {
+const ProductCard = ({ props }) => {
   const [isHover, setIsHover] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOpenProductDetailModel, setIsOpenProductDetailModel] =
@@ -24,6 +24,16 @@ const ProductCard = (props) => {
 
   const onViewProductDetailsModelHandler = (val) => {
     setIsOpenProductDetailModel(val);
+  };
+
+  const onDialogCloseHanlder = (e) => {
+    e.preventDefault();
+    setIsOpenProductDetailModel(false);
+  };
+
+  const onAddToCartHandler = (id, itemCount, e) => {
+    e.preventDefault();
+    console.log(id, itemCount);
   };
 
   return (
@@ -117,10 +127,10 @@ const ProductCard = (props) => {
       </Box>
       {isOpenProductDetailModel && (
         <ProductDetailsDialog
+          productdetails={props}
           isOpen={isOpenProductDetailModel}
-          onDialogCloseHanlder={() => {
-            onViewProductDetailsModelHandler(false);
-          }}
+          onDialogCloseHanlder={onDialogCloseHanlder}
+          onAddToCartHandler={onAddToCartHandler}
         />
       )}
     </>

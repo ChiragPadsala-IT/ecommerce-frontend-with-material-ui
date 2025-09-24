@@ -23,8 +23,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ProductDetailsDialog = ({ isOpen, onDialogCloseHanlder }) => {
+const ProductDetailsDialog = ({
+  isOpen,
+  onDialogCloseHanlder,
+  productdetails,
+  onAddToCartHandler,
+}) => {
   const [imageShowNumber, setImageShowNumber] = useState(0);
+  const [itemCount, setItemCount] = useState(1);
 
   const imageList = [
     "https://m.media-amazon.com/images/I/61GpT8+nFXL._UY900_.jpg",
@@ -34,6 +40,18 @@ const ProductDetailsDialog = ({ isOpen, onDialogCloseHanlder }) => {
 
   const onImageHandler = (index) => {
     setImageShowNumber(index);
+  };
+
+  const onAddItemCountHandler = (e) => {
+    e.preventDefault();
+
+    setItemCount(itemCount < 10 ? itemCount + 1 : 10);
+  };
+
+  const onMinusItemCountHandler = (e) => {
+    e.preventDefault();
+
+    setItemCount(itemCount > 1 ? itemCount - 1 : 0);
   };
 
   return (
@@ -48,13 +66,9 @@ const ProductDetailsDialog = ({ isOpen, onDialogCloseHanlder }) => {
       maxWidth="md"
     >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <DialogTitle>{"Precious Gift"}</DialogTitle>
+        <DialogTitle>{productdetails.name}</DialogTitle>
         <Box sx={{ m: "1em" }}>
-          <IconButton
-            onClick={() => {
-              onDialogCloseHanlder(false);
-            }}
-          >
+          <IconButton onClick={onDialogCloseHanlder}>
             <CloseOutlinedIcon />
           </IconButton>
         </Box>
@@ -69,17 +83,17 @@ const ProductDetailsDialog = ({ isOpen, onDialogCloseHanlder }) => {
         >
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography sx={{ opacity: "0.7" }}>Brands : </Typography>
-            <Typography>Unknown</Typography>
+            <Typography>{productdetails.brand}</Typography>
           </Box>
           <Divider orientation="vertical" flexItem />
           <Box sx={{ display: "flex", opacity: "0.7", gap: 1 }}>
-            <Rating />
+            <Rating value={productdetails.rating} />
             <Typography>1 Review</Typography>
           </Box>
           <Divider orientation="vertical" flexItem />
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography sx={{ opacity: "0.7" }}>SKU : </Typography>
-            <Typography>ZU4E58R</Typography>
+            <Typography>{productdetails.sku}</Typography>
           </Box>
         </Box>
         <Divider />
@@ -96,11 +110,8 @@ const ProductDetailsDialog = ({ isOpen, onDialogCloseHanlder }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                // display: "grid",
-                // placeItems: "center",
                 width: "70%",
                 height: "70%",
-                // margin: "auto",
                 background: "yellow",
                 mb: "2em",
               }}
@@ -135,7 +146,10 @@ const ProductDetailsDialog = ({ isOpen, onDialogCloseHanlder }) => {
                       padding: "2px",
                       cursor: "pointer",
                     }}
-                    onClick={() => onImageHandler(index)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onImageHandler(index);
+                    }}
                   >
                     <img src={e} style={{ height: "100%", width: "100%" }} />
                   </Box>
@@ -145,89 +159,118 @@ const ProductDetailsDialog = ({ isOpen, onDialogCloseHanlder }) => {
           </Box>
           <Box
             sx={{
-              //   width: "50%",
               display: "flex",
               flexDirection: "column",
               gap: 2,
-              //   background: "red",
             }}
           >
             <Box sx={{ display: "flex", gap: 1 }}>
-              <Typography sx={{ textDecoration: "line-through", opacity: 0.6 }}>
-                $9.55
+              <Typography
+                sx={{
+                  textDecoration:
+                    productdetails.discount > 0 ? "line-through" : "none",
+                  color:
+                    productdetails.discount > 0
+                      ? "rgba(117, 115, 115, 1)"
+                      : "black ",
+                  fontSize: "1.1em",
+                  fontWeight: productdetails.discount > 0 ? "200" : "bold",
+                }}
+              >
+                {"$" + productdetails.price}
               </Typography>
-              <Typography>$7.99</Typography>
+              {productdetails.discount > 0 && (
+                <Typography
+                  sx={{
+                    fontWeight: "bold",
+                    pl: "5px",
+                    fontSize: "1.1em",
+                    color: "black",
+                  }}
+                >
+                  {"$" + productdetails.discount}
+                </Typography>
+              )}
             </Box>
             <Box
               sx={{
-                background: "rgba(147, 212, 158, 1)",
+                background: productdetails.inStock
+                  ? "rgba(147, 212, 158, 1)"
+                  : "rgba(212, 163, 147, 1)",
                 width: "fit-content",
                 p: "2px 10px",
                 borderRadius: "5px",
               }}
             >
               <Typography
-                sx={{ color: "green", fontSize: "0.8em", letterSpacing: 1 }}
+                sx={{
+                  color: productdetails.inStock ? "green" : "red",
+                  fontSize: "0.8em",
+                  letterSpacing: 1,
+                }}
               >
-                In stock
+                {productdetails.inStock ? "In Stock" : "Out of Stock"}
               </Typography>
             </Box>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-              nec odio. Praesent libero. Sed cursus ante dapibus diam.
-            </Typography>
+            <Typography>{productdetails.desc}</Typography>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <IconButton>
+              <IconButton onClick={onMinusItemCountHandler}>
                 <RemoveIcon />
               </IconButton>
-              <Typography>1</Typography>
-              <IconButton>
+              <Typography>{itemCount}</Typography>
+              <IconButton onClick={onAddItemCountHandler}>
                 <AddIcon />
               </IconButton>
-              <Button>Add To Cart</Button>
+              <Button
+                variant="contained"
+                onClick={(e) => onAddToCartHandler(101, itemCount, e)}
+              >
+                Add To Cart
+              </Button>
             </Box>
-            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-              <Button variant="outlined" sx={{ display: "flex", gap: 1 }}>
-                <FavoriteIcon />
-                <Typography>Add to Wishlist</Typography>
+            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+              <Button
+                variant="outlined"
+                sx={{ display: "flex", gap: 1, p: "0.5em 1em" }}
+              >
+                <FavoriteIcon sx={{ fontSize: "1.5em" }} />
+                <Typography sx={{ fontSize: "0.9em" }}>
+                  Add to Wishlist
+                </Typography>
               </Button>
               <Button variant="text" sx={{ display: "flex", gap: 1 }}>
-                <UnfoldMoreIcon />
-                <Typography>Compare</Typography>
+                <UnfoldMoreIcon sx={{ fontSize: "1.5em" }} />
+                <Typography sx={{ fontSize: "0.9em" }}>Compare</Typography>
               </Button>
             </Box>
             <Box>
               <Box sx={{ display: "flex", gap: 1 }}>
                 <DoneIcon sx={{ color: "green" }} />
-                <Typography>Type: Organic</Typography>
+                <Typography>Type: {productdetails.type}</Typography>
               </Box>
               <Box sx={{ display: "flex", gap: 1 }}>
                 <DoneIcon sx={{ color: "green" }} />
-                <Typography>MFG: Jun 4, 2021</Typography>
+                <Typography>MFG: {productdetails.mfg}</Typography>
               </Box>
               <Box sx={{ display: "flex", gap: 1 }}>
                 <DoneIcon sx={{ color: "green" }} />
-                <Typography>Life: 30 days</Typography>
+                <Typography>Life: {productdetails.life}</Typography>
               </Box>
             </Box>
             <Divider sx={{ borderBottomWidth: "3px" }} />
             <Box>
               <Box sx={{ display: "flex", gap: 1 }}>
                 <Typography>Category : </Typography>
-                <Typography>Woman</Typography>
+                <Typography>{productdetails.category}</Typography>
               </Box>
               <Box sx={{ display: "flex", gap: 1 }}>
                 <Typography>Tags : </Typography>
-                <Typography>Luxurious</Typography>
+                <Typography>{productdetails.tag}</Typography>
               </Box>
             </Box>
           </Box>
         </Box>
       </DialogContent>
-      {/* <DialogActions>
-        <Button onClick={handleClose}>Disagree</Button>
-        <Button onClick={handleClose}>Agree</Button>
-      </DialogActions> */}
     </Dialog>
   );
 };

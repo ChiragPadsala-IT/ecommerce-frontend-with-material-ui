@@ -9,7 +9,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { IconButton } from "@mui/material";
 import ProductCard from "./ProductCard";
 
-const HomePageSellingList = ({ title, desc, productList, advertiseImg }) => {
+const HomePageSellingList = ({ advertiseImg, ...props }) => {
   return (
     <Box
       sx={{
@@ -17,7 +17,6 @@ const HomePageSellingList = ({ title, desc, productList, advertiseImg }) => {
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
         width: "100%",
-        // position: "relative",
       }}
     >
       <Box
@@ -56,8 +55,8 @@ const HomePageSellingList = ({ title, desc, productList, advertiseImg }) => {
           }}
         >
           <Box>
-            <Typography sx={{ fontSize: "2em" }}>{title}</Typography>
-            <Typography sx={{ fontWeight: "300" }}>{desc}</Typography>
+            <Typography sx={{ fontSize: "2em" }}>{props.title}</Typography>
+            <Typography sx={{ fontWeight: "300" }}>{props.desc}</Typography>
           </Box>
           <Box>
             <Button variant="outlined">
@@ -104,16 +103,8 @@ const HomePageSellingList = ({ title, desc, productList, advertiseImg }) => {
               </IconButton>
             }
           >
-            {productList.map((r, index) => (
-              <ProductCard
-                name={r.name}
-                desc={r.desc}
-                image={r.image}
-                inStock={r.inStock}
-                rating={r.rating}
-                price={r.price}
-                discount={r.discount}
-              />
+            {props.productList.map((r, index) => (
+              <ProductCard props={r} />
             ))}
           </Carousel>
         </Box>
