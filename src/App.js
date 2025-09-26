@@ -19,7 +19,7 @@ function App() {
           },
         }}
       >
-        <Header />
+        {/* <Header /> */}
         <Box sx={{ flex: 1, height: "auto" }}>
           <Routes>
             {routes.map((r, index) => (

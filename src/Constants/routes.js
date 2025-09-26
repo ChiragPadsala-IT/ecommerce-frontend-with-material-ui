@@ -1,7 +1,19 @@
-import Home from "../Pages/Home/Home";
+import Home from "../Pages/Home";
+import Login from "../Pages/Login";
 import MyCart from "../Pages/MyCart";
+import SignUp from "../Pages/SignUp";
 
 export const routes = [
+  {
+    name: "Login",
+    path: "/login",
+    page: <Login />,
+  },
+  {
+    name: "SignUp",
+    path: "/sign-up",
+    page: <SignUp />,
+  },
   {
     name: "Home",
     path: "/",

@@ -8,7 +8,7 @@ import {
   CustomerCommentsCard,
   NewsLetter,
   FilterProductDrawer,
-} from "../../Components";
+} from "../Components";
 import Box from "@mui/material/Box";
 
 const Home = () => {
