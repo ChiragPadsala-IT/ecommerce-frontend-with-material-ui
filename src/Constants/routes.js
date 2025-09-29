@@ -11,7 +11,7 @@ export const routes = [
   },
   {
     name: "SignUp",
-    path: "/sign-up",
+    path: "/signup",
     page: <SignUp />,
   },
   {

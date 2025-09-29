@@ -10,7 +10,7 @@ import {
 import googleLogo from "../Assets/Logos/google_logo.png";
 import facebookLogo from "../Assets/Logos/facebook_logo.png";
 import loginBg from "../Assets/Images/loginbg.webp";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import validator from "validator";
 import React, { useState } from "react";
 
 const Login = () => {
@@ -18,6 +18,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState({ email: "", password: "" });
 
   const onUserCredentialHandler = (e) => {
     e.preventDefault();
@@ -32,7 +34,36 @@ const Login = () => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    console.log(userCredential);
+    if (userCredential.email == "") {
+      setError((prev) => {
+        return { ...prev, email: "Email is required..." };
+      });
+    } else if (!validator.isEmail(userCredential.email)) {
+      setError((prev) => {
+        return { ...prev, email: "Invalid email address..." };
+      });
+    } else {
+      setError((prev) => {
+        return { ...prev, email: "" };
+      });
+    }
+
+    if (userCredential.password == "") {
+      setError((prev) => {
+        return { ...prev, password: "Password is required..." };
+      });
+    } else if (userCredential.password.length < 10) {
+      setError((prev) => {
+        return {
+          ...prev,
+          password: "Password must be 10 or more characters...",
+        };
+      });
+    } else {
+      setError((prev) => {
+        return { ...prev, password: "" };
+      });
+    }
 
     setUserCredential({
       email: "",
@@ -80,6 +111,11 @@ const Login = () => {
               onChange={onUserCredentialHandler}
             />
           </FormControl>
+          {error.email.length > 0 && (
+            <Typography sx={{ color: "red", fontSize: "14px" }}>
+              {error.email}
+            </Typography>
+          )}
           <FormControl variant="outlined">
             <InputLabel>Password</InputLabel>
             <OutlinedInput
@@ -90,6 +126,11 @@ const Login = () => {
               onChange={onUserCredentialHandler}
             />
           </FormControl>
+          {error.password.length > 0 && (
+            <Typography sx={{ color: "red", fontSize: "14px" }}>
+              {error.password}
+            </Typography>
+          )}
           <Typography
             sx={{
               color: "rgba(82, 133, 204, 1)",
@@ -116,8 +157,24 @@ const Login = () => {
           </Typography>
           <Typography>Or Continue with social account</Typography>
           <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
-            <Avatar src={googleLogo} sx={{ scale: 1.5, cursor: "pointer" }} />
-            <Avatar src={facebookLogo} sx={{ scale: 1, cursor: "pointer" }} />
+            <Avatar
+              src={googleLogo}
+              sx={{ scale: 1.5, cursor: "pointer" }}
+              onClick={() =>
+                alert(
+                  "Google sign up is working process, so please use default way to login"
+                )
+              }
+            />
+            <Avatar
+              src={facebookLogo}
+              sx={{ scale: 1, cursor: "pointer" }}
+              onClick={() =>
+                alert(
+                  "Facebook sign up is working process, so please use default way to login"
+                )
+              }
+            />
           </Box>
         </Box>
       </Box>
