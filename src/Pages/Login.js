@@ -4,6 +4,7 @@ import {
   Button,
   FormControl,
   InputLabel,
+  Link,
   OutlinedInput,
   Typography,
 } from "@mui/material";
@@ -12,6 +13,7 @@ import facebookLogo from "../Assets/Logos/facebook_logo.png";
 import loginBg from "../Assets/Images/loginbg.webp";
 import validator from "validator";
 import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 const Login = () => {
   const [userCredential, setUserCredential] = useState({
@@ -78,7 +80,6 @@ const Login = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
           width: "100%",
         }}
       >
@@ -145,15 +146,17 @@ const Login = () => {
           </Button>
           <Typography>
             Not Registered?{" "}
-            <span
-              style={{
-                color: "rgba(82, 133, 204, 1)",
-                textDecoration: "underLine",
-                cursor: "pointer",
-              }}
-            >
-              Sign Up
-            </span>
+            <Link component={RouterLink} to={"/signup"}>
+              <span
+                style={{
+                  color: "rgba(82, 133, 204, 1)",
+                  textDecoration: "underLine",
+                  cursor: "pointer",
+                }}
+              >
+                Sign Up
+              </span>
+            </Link>
           </Typography>
           <Typography>Or Continue with social account</Typography>
           <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>

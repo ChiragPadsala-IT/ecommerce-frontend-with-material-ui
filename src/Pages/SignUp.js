@@ -4,6 +4,7 @@ import {
   Button,
   FormControl,
   InputLabel,
+  Link,
   OutlinedInput,
   Typography,
 } from "@mui/material";
@@ -12,6 +13,7 @@ import googleLogo from "../Assets/Logos/google_logo.png";
 import facebookLogo from "../Assets/Logos/facebook_logo.png";
 import loginBg from "../Assets/Images/loginbg.webp";
 import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 const SignUp = () => {
   const [userCredential, setUserCredential] = useState({
@@ -108,7 +110,6 @@ const SignUp = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
           width: "100%",
         }}
       >
@@ -181,15 +182,17 @@ const SignUp = () => {
           </Button>
           <Typography>
             Already have an account?{" "}
-            <span
-              style={{
-                color: "rgba(82, 133, 204, 1)",
-                textDecoration: "underLine",
-                cursor: "pointer",
-              }}
-            >
-              Login
-            </span>
+            <Link component={RouterLink} to={"/login"}>
+              <span
+                style={{
+                  color: "rgba(82, 133, 204, 1)",
+                  textDecoration: "underLine",
+                  cursor: "pointer",
+                }}
+              >
+                Login
+              </span>
+            </Link>
           </Typography>
           <Typography>Or Continue with social account</Typography>
           <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>

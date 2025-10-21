@@ -18,6 +18,7 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { categories } from "../Constants/categories";
 import Box from "@mui/material/Box";
+import { Link as RouterLink } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -186,13 +187,16 @@ const Header = () => {
             }}
           >
             <ShoppingCartCheckoutIcon sx={{ mr: "1rem" }} />
-            <Avatar
-              style={{
-                background: "none",
-                color: "black",
-                margin: 0,
-              }}
-            />
+
+            <Link component={RouterLink} to="/login">
+              <Avatar
+                style={{
+                  background: "none",
+                  color: "black",
+                  margin: 0,
+                }}
+              />
+            </Link>
           </Container>
         </Grid>
       </Grid>
