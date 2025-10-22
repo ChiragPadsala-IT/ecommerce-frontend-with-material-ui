@@ -3,9 +3,12 @@ import {
   Box,
   Button,
   FormControl,
+  FormLabel,
   InputLabel,
   Link,
+  ListItem,
   OutlinedInput,
+  Radio,
   Typography,
 } from "@mui/material";
 import validator from "validator";
@@ -20,6 +23,7 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "user",
   });
 
   const [error, setError] = useState({
@@ -108,9 +112,11 @@ const SignUp = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
+          justifyContent: "center", // horizontal
+          alignItems: "center", // vertical
+          height: "100vh", // full screen height
+          width: "100%", // full width
+          position: "relative",
         }}
       >
         <Box
@@ -130,7 +136,7 @@ const SignUp = () => {
           <Typography
             sx={{ textAlign: "center", fontSize: "22px", fontWeight: "600" }}
           >
-            Login
+            SignUp
           </Typography>
           <FormControl variant="outlined">
             <InputLabel>Email</InputLabel>
@@ -177,6 +183,36 @@ const SignUp = () => {
               {error.confirmPassword}
             </Typography>
           )}
+          <ListItem>
+            <FormLabel>User</FormLabel>
+            <Radio
+              checked={userCredential.role === "user"}
+              onChange={(e) => {
+                setUserCredential((prev) => {
+                  return {
+                    ...prev,
+                    role: e.target.value,
+                  };
+                });
+              }}
+              value="user"
+              name="role"
+            />
+            <FormLabel>Seller</FormLabel>
+            <Radio
+              checked={userCredential.role === "seller"}
+              onChange={(e) => {
+                setUserCredential((prev) => {
+                  return {
+                    ...prev,
+                    role: e.target.value,
+                  };
+                });
+              }}
+              value="seller"
+              name="role"
+            />
+          </ListItem>
           <Button variant="contained" type="submit" onClick={onSubmitHandler}>
             Sign Up
           </Button>

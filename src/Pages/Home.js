@@ -8,12 +8,14 @@ import {
   CustomerCommentsCard,
   NewsLetter,
   FilterProductDrawer,
+  Header,
 } from "../Components";
 import Box from "@mui/material/Box";
 
 const Home = () => {
   return (
     <Box sx={{ height: "100vh" }}>
+      <Header />
       <ReactSlickSlider />
       <FeaturedCategories />
       <FilterProductDrawer />

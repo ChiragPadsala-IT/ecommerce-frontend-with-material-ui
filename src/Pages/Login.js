@@ -14,6 +14,7 @@ import loginBg from "../Assets/Images/loginbg.webp";
 import validator from "validator";
 import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { UserApi } from "../Api/user";
 
 const Login = () => {
   const [userCredential, setUserCredential] = useState({
@@ -33,7 +34,7 @@ const Login = () => {
     });
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
 
     if (userCredential.email == "") {
@@ -67,10 +68,24 @@ const Login = () => {
       });
     }
 
-    setUserCredential({
-      email: "",
-      password: "",
-    });
+    try {
+      const res = await fetch(UserApi.login, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userCredential),
+      });
+      const data = await res.json();
+
+      console.log(data.success);
+    } catch (err) {
+      console.log("*******************************");
+      console.log(err);
+    }
+
+    // setUserCredential({
+    //   email: "",
+    //   password: "",
+    // });
   };
 
   return (
@@ -81,6 +96,7 @@ const Login = () => {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
+          height: "100vh",
         }}
       >
         <Box
