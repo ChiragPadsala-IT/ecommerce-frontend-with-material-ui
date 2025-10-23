@@ -40,7 +40,7 @@ const SignUp = () => {
 
   const [verificationcode, setVerificationcode] = useState("");
 
-  const [verificationError, setVerificationError] = useState("");
+  const [verificationMessage, setVerificationMessage] = useState("");
 
   const onUserCredentialHandler = (e) => {
     e.preventDefault();
@@ -150,19 +150,40 @@ const SignUp = () => {
       const data = await res.json();
 
       if (!data.success) {
-        setVerificationError(data.message);
+        setVerificationMessage(data.message);
       } else {
         navigate("/");
       }
     } catch (error) {
-      setVerificationError(error.message);
+      setVerificationMessage(error.message);
     }
   };
 
   const onResendVerificationCodeHanlder = async (e) => {
+    // e.preventDefault();
+
     try {
+      const res = await fetch(UserApi.resendVerificationCode, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userCredential.email,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        setVerificationMessage(data.message);
+      } else {
+        setVerificationMessage(
+          "OTP resent successfully. Please check your email."
+        );
+      }
     } catch (error) {
-      verificationError(error.message);
+      setVerificationMessage(error.message);
     }
   };
 
@@ -211,18 +232,18 @@ const SignUp = () => {
             <Button variant="contained" onClick={onVarificarionCodeHandler}>
               Verify Email
             </Button>
-            {verificationError.length > 0 && (
+            {verificationMessage.length > 0 && (
               <Typography sx={{ color: "red", fontSize: "14px" }}>
-                {verificationError}
+                {verificationMessage}
               </Typography>
             )}
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Typography
-                variant="span"
                 sx={{
                   color: "rgba(69, 132, 220, 1)",
                   cursor: "pointer",
                 }}
+                onClick={onResendVerificationCodeHanlder}
               >
                 Resend code
               </Typography>
