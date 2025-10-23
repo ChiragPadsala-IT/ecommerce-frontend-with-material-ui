@@ -66,20 +66,20 @@ const Login = () => {
       setError((prev) => {
         return { ...prev, password: "" };
       });
-    }
 
-    try {
-      const res = await fetch(UserApi.login, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userCredential),
-      });
-      const data = await res.json();
+      try {
+        const res = await fetch(UserApi.login, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(userCredential),
+        });
+        const data = await res.json();
 
-      console.log(data.success);
-    } catch (err) {
-      console.log("*******************************");
-      console.log(err);
+        console.log(data.success);
+      } catch (err) {
+        console.log("*******************************");
+        console.log(err);
+      }
     }
 
     // setUserCredential({
