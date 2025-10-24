@@ -18,7 +18,8 @@ import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import { categories } from "../Constants/categories";
 import Box from "@mui/material/Box";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,6 +65,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const [country, setCountry] = React.useState("");
   const [isAllCategoriesOpen, setIsAllCategoriesOpen] = React.useState(false);
 
@@ -186,17 +190,28 @@ const Header = () => {
               padding: "0px",
             }}
           >
-            <ShoppingCartCheckoutIcon sx={{ mr: "1rem" }} />
+            <ShoppingCartCheckoutIcon
+              sx={{ mr: "1rem", cursor: "pointer" }}
+              onClick={() => {
+                navigate("/mycart");
+              }}
+            />
 
-            <Link component={RouterLink} to="/login">
-              <Avatar
-                style={{
-                  background: "none",
-                  color: "black",
-                  margin: 0,
-                }}
-              />
-            </Link>
+            {user.isUserLogin ? (
+              <Avatar sx={{ fontWeight: 700 }}>
+                {user.email[0].toUpperCase()}
+              </Avatar>
+            ) : (
+              <Link component={RouterLink} to="/login">
+                <Avatar
+                  style={{
+                    background: "none",
+                    color: "black",
+                    margin: 0,
+                  }}
+                />
+              </Link>
+            )}
           </Container>
         </Grid>
       </Grid>
@@ -261,7 +276,9 @@ const Header = () => {
                 ":hover": { background: "#a6b9cc6c" },
                 padding: "0.5rem 1rem",
                 borderRadius: 5,
-                // fontSize: "1em",
+              }}
+              onClick={() => {
+                navigate(r.path);
               }}
             >
               {r.name}

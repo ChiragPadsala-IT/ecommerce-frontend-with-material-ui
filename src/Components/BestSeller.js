@@ -1,12 +1,25 @@
 import "react-multi-carousel/lib/styles.css";
 import HomePageSellingList from "./HomePageSellingList";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bestSeller } from "../redux/product/productSlice.js";
 
 const BestSeller = () => {
   const [productList, setProductList] = useState([]);
   const [advertiseImg, setAdvertiseImg] = useState("");
 
+  const dispatch = useDispatch();
+  const bestSellerList = useSelector(
+    (state) => state.product.bestSellerProduct
+  );
+
+  console.log("*************Best Seller Component*************");
+  console.log(bestSellerList);
+  console.log("*************Best Seller Component*************");
+
   useEffect(() => {
+    dispatch(bestSeller);
+
     const list = [
       {
         name: "Ophidia pochette",
@@ -98,7 +111,7 @@ const BestSeller = () => {
     setAdvertiseImg(
       "https://www.shutterstock.com/shutterstock/photos/2661738301/display_1500/stock-vector--d-flash-sale-banner-with-september-number-on-podium-or-stage-isolated-on-background-with-2661738301.jpg"
     );
-  }, productList);
+  }, bestSellerList);
 
   return (
     <HomePageSellingList

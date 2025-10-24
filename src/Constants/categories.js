@@ -2,41 +2,21 @@ export const categories = [
   {
     name: "Home",
     icon: "",
-    path: "",
+    path: "/",
   },
   {
-    name: "Fashion",
+    name: "Favorite",
     icon: "",
-    path: "",
+    path: "/favorite",
   },
   {
-    name: "Electronic",
+    name: "MyCart",
     icon: "",
-    path: "",
-  },
-  {
-    name: "Bakery",
-    icon: "",
-    path: "",
-  },
-  {
-    name: "Grocery",
-    icon: "",
-    path: "",
-  },
-  {
-    name: "Mobile",
-    icon: "",
-    path: "",
-  },
-  {
-    name: "Blog",
-    icon: "",
-    path: "",
+    path: "/mycart",
   },
   {
     name: "Contact",
     icon: "",
-    path: "",
+    path: "/contact-us",
   },
 ];
