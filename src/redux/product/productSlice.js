@@ -11,16 +11,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     bestSeller: async (state, action) => {
-      try {
-        const res = await fetch(ProductApi.bestSeller);
-        const data = await res.json();
-        console.log("***********Best Seller*******************");
-        console.log(data);
-        console.log("******************************");
-        if (res.status == 200) {
-          state.bestSellerProduct = data;
-        }
-      } catch (error) {}
+      state.bestSellerProduct = action.payload;
     },
   },
 });
