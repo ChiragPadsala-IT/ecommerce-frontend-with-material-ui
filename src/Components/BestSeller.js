@@ -18,6 +18,9 @@ const BestSeller = () => {
         console.log(err);
         console.log("*****************Best Seller useEffect******************");
       });
+    setAdvertiseImg(
+      "https://images.squarespace-cdn.com/content/v1/63a319730d8d6a5a211c4a43/999d5bb0-0a5e-4890-abcb-5b4a7c7dcb1d/Car-Selling-Point-Ad-Design.jpg"
+    );
   }, []);
 
   return (
