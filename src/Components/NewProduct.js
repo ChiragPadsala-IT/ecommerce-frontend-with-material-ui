@@ -13,11 +13,11 @@ const NewProduct = () => {
         .then((data) => setProductList(data.products))
         .catch((err) => {
           console.log(
-            "*****************Best Seller useEffect******************"
+            "*****************New Product useEffect******************"
           );
           console.log(err);
           console.log(
-            "*****************Best Seller useEffect******************"
+            "*****************New Product useEffect******************"
           );
         });
       setAdvertiseImg(
