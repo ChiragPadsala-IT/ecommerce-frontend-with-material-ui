@@ -103,7 +103,9 @@ const HomePageSellingList = ({ advertiseImg, ...props }) => {
             }
           >
             {props.productList.map((r, index) => (
-              <ProductCard props={r} />
+              <div style={{ margin: "0px 2px" }}>
+                <ProductCard props={r} />
+              </div>
             ))}
           </Carousel>
         </Box>

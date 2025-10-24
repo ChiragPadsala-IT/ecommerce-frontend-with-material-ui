@@ -46,7 +46,6 @@ const ProductCard = ({ props }) => {
       <Box
         onMouseEnter={() => onHoverHandler(true)}
         onMouseLeave={() => onHoverHandler(false)}
-        on
         sx={{
           width: "100%",
           height: "100%",
