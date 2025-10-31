@@ -7,8 +7,12 @@ import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ProductDetailsDialog from "./ProductDetailsDialog";
+import { useDispatch } from "react-redux";
+import { addToCartData } from "../redux/new/actions/mycartAction";
 
 const ProductCard = ({ props }) => {
+  const dispatch = useDispatch();
+
   const [isHover, setIsHover] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isOpenProductDetailModel, setIsOpenProductDetailModel] =
@@ -38,6 +42,13 @@ const ProductCard = ({ props }) => {
 
   const onAddToCartHandler = (id, itemCount, e) => {
     e.preventDefault();
+
+    dispatch(
+      addToCartData({
+        productId: id,
+        quantity: itemCount,
+      })
+    );
     console.log(id, itemCount);
   };
 

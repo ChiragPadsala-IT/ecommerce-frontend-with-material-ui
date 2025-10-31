@@ -55,10 +55,6 @@ const ProductDetailsDialog = ({
     setItemCount(itemCount > 1 ? itemCount - 1 : 0);
   };
 
-  console.log("************************************");
-  console.log(productdetails);
-  console.log("************************************");
-
   return (
     <Dialog
       open={isOpen}

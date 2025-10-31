@@ -10,7 +10,7 @@ const NewProduct = () => {
   );
 
   const dispatch = useDispatch();
-  const { newProduct } = useSelector((state) => state.myproductReducer);
+  const { newProduct } = useSelector((state) => state.productReducer);
 
   useEffect(() => {
     dispatch(getNewProduct());

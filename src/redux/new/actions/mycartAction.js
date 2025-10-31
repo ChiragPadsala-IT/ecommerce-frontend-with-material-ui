@@ -22,7 +22,7 @@ export const addToCartData = (product) => async (dispatch) => {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(product),
-      credentials: true,
+      credentials: "include",
     });
 
     const data = await res.json();
