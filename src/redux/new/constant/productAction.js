@@ -1,0 +1,4 @@
+export const productAction = {
+  GET_NEW_PRODUCT: "GET_NEW_PRODUCT",
+  GET_BEST_SELLER_PRODUCT: "GET_BEST_SELLER_PRODUCT",
+};

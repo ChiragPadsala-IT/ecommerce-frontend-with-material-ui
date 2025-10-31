@@ -19,8 +19,14 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import React, { useEffect, useState } from "react";
 import { Header } from "../Components";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData } from "../redux/new/actions/mycartAction";
 
 const MyCart = () => {
+  const { myCartData } = useSelector((state) => state.cartReducer);
+  const dispatch = useDispatch();
+  console.log("************Hello Chirag*********************");
+
   const [isAllCheck, setIsAllCheck] = useState(true);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
@@ -66,6 +72,8 @@ const MyCart = () => {
   ]);
 
   useEffect(() => {
+    dispatch(getCartData());
+
     const hasChecked = myCartList.some((item) => item.isChecked == false);
 
     if (hasChecked) {
@@ -84,6 +92,13 @@ const MyCart = () => {
 
     setTotal(subtotal + shippingCharge);
   }, [myCartList, total, subtotal]);
+
+  console.log(myCartData);
+  useEffect(() => {
+    console.log("************my Data*********");
+    console.log(myCartData);
+    console.log("************my Data*********");
+  }, [myCartData]);
 
   const onAllCheckHandler = () => {
     setMyCartList((prev) =>
@@ -179,7 +194,7 @@ const MyCart = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {myCartList.map((e, index) => (
+                  {myCartData.map((e, index) => (
                     <TableRow>
                       <TableCell>
                         <Checkbox
@@ -204,8 +219,8 @@ const MyCart = () => {
                             }}
                           >
                             <img
-                              src={e.productDetails.image}
-                              alt={e.productDetails.name}
+                              src={e.image}
+                              alt={e.name}
                               style={{ height: "70%", width: "70%" }}
                             />
                           </Box>
@@ -216,18 +231,16 @@ const MyCart = () => {
                               justifyContent: "center",
                             }}
                           >
-                            <Typography sx={{ pl: "3px" }}>
-                              {e.productDetails.name}
-                            </Typography>
+                            <Typography sx={{ pl: "3px" }}>{e.name}</Typography>
                             <Box sx={{ display: "flex", gap: 1 }}>
-                              <Rating value={e.productDetails.rating} />
-                              <Typography>{e.productDetails.review}</Typography>
+                              <Rating value={e.rating} />
+                              <Typography>{e.review}</Typography>
                             </Box>
                           </Box>
                         </Box>
                       </TableCell>
                       <TableCell align="center">
-                        <Typography>${e.unitPrice}</Typography>
+                        <Typography>${e.price}</Typography>
                       </TableCell>
                       <TableCell align="center">
                         <Box
@@ -254,7 +267,7 @@ const MyCart = () => {
                         </Box>
                       </TableCell>
                       <TableCell align="center">
-                        {e.quantity * e.unitPrice}
+                        {e.quantity * e.price}
                       </TableCell>
                       <TableCell align="center">
                         <IconButton

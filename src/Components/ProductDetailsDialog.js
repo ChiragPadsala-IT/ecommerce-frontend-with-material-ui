@@ -55,6 +55,10 @@ const ProductDetailsDialog = ({
     setItemCount(itemCount > 1 ? itemCount - 1 : 0);
   };
 
+  console.log("************************************");
+  console.log(productdetails);
+  console.log("************************************");
+
   return (
     <Dialog
       open={isOpen}
@@ -224,7 +228,9 @@ const ProductDetailsDialog = ({
               </IconButton>
               <Button
                 variant="contained"
-                onClick={(e) => onAddToCartHandler(101, itemCount, e)}
+                onClick={(e) =>
+                  onAddToCartHandler(productdetails._id, itemCount, e)
+                }
               >
                 Add To Cart
               </Button>
