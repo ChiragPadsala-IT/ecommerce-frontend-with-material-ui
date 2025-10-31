@@ -20,7 +20,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import React, { useEffect, useState } from "react";
 import { Header } from "../Components";
 import { useDispatch, useSelector } from "react-redux";
-import { getCartData } from "../redux/new/actions/mycartAction";
+import { addToCartData, getCartData } from "../redux/new/actions/mycartAction";
 
 const MyCart = () => {
   const { myCartData } = useSelector((state) => state.cartReducer);
@@ -124,23 +124,29 @@ const MyCart = () => {
     console.log(e.target.name);
   };
 
-  const addQuantityHandler = (id) => {
-    setMyCartList((prev) =>
-      prev.map((item) =>
-        item.id == id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
+  const addQuantityHandler = async (id, quantity) => {
+    if (quantity <= 10) {
+      await dispatch(
+        addToCartData({
+          productId: id,
+          quantity: quantity,
+        })
+      );
+
+      dispatch(getCartData());
+    }
   };
 
-  const removeQuantityHandler = (id) => {
-    const qa = myCartList.some((item) => item.id == id && item.quantity == 0);
-
-    if (qa !== true) {
-      setMyCartList((prev) =>
-        prev.map((item) =>
-          item.id == id ? { ...item, quantity: item.quantity - 1 } : item
-        )
+  const removeQuantityHandler = async (id, quantity) => {
+    if (quantity > 0) {
+      await dispatch(
+        addToCartData({
+          productId: id,
+          quantity: quantity,
+        })
       );
+
+      dispatch(getCartData());
     }
   };
 
@@ -252,7 +258,9 @@ const MyCart = () => {
                           }}
                         >
                           <IconButton
-                            onClick={() => removeQuantityHandler(e.id)}
+                            onClick={() =>
+                              removeQuantityHandler(e._id, e.quantity - 1)
+                            }
                           >
                             <RemoveIcon />
                           </IconButton>
@@ -261,7 +269,11 @@ const MyCart = () => {
                               {e.quantity}
                             </Typography>
                           </IconButton>
-                          <IconButton onClick={() => addQuantityHandler(e.id)}>
+                          <IconButton
+                            onClick={() =>
+                              addQuantityHandler(e._id, e.quantity + 1)
+                            }
+                          >
                             <AddIcon />
                           </IconButton>
                         </Box>
