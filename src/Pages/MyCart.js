@@ -21,108 +21,17 @@ import React, { useEffect, useState } from "react";
 import { Header } from "../Components";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartData, getCartData } from "../redux/new/actions/mycartAction";
+import { yellow } from "@mui/material/colors";
 
 const MyCart = () => {
-  const { myCartData } = useSelector((state) => state.cartReducer);
+  const { myCartData, shippingCharge } = useSelector(
+    (state) => state.cartReducer
+  );
   const dispatch = useDispatch();
-  console.log("************Hello Chirag*********************");
-
-  const [isAllCheck, setIsAllCheck] = useState(true);
-  const [subtotal, setSubtotal] = useState(0);
-  const [total, setTotal] = useState(0);
-  const shippingCharge = 0;
-
-  const [myCartList, setMyCartList] = useState([
-    {
-      id: 1,
-      isChecked: true,
-      productDetails: {
-        image: "https://m.media-amazon.com/images/I/61GpT8+nFXL._UY900_.jpg",
-        name: "Product Name",
-        rating: 3,
-        review: 20,
-      },
-      unitPrice: 10.99,
-      quantity: 2,
-    },
-    {
-      id: 2,
-      isChecked: true,
-      productDetails: {
-        image: "https://m.media-amazon.com/images/I/61GpT8+nFXL._UY900_.jpg",
-        name: "Product Name",
-        rating: 3,
-        review: 20,
-      },
-      unitPrice: 10.99,
-      quantity: 2,
-    },
-    {
-      id: 3,
-      isChecked: true,
-      productDetails: {
-        image: "https://m.media-amazon.com/images/I/61GpT8+nFXL._UY900_.jpg",
-        name: "Product Name",
-        rating: 3,
-        review: 20,
-      },
-      unitPrice: 10.99,
-      quantity: 2,
-    },
-  ]);
 
   useEffect(() => {
     dispatch(getCartData());
-
-    const hasChecked = myCartList.some((item) => item.isChecked == false);
-
-    if (hasChecked) {
-      setIsAllCheck(false);
-    } else {
-      setIsAllCheck(true);
-    }
-
-    setSubtotal(
-      myCartList.reduce(
-        (acc, item) =>
-          item.isChecked ? acc + item.quantity * item.unitPrice : acc,
-        0
-      )
-    );
-
-    setTotal(subtotal + shippingCharge);
-  }, [myCartList, total, subtotal]);
-
-  console.log(myCartData);
-  useEffect(() => {
-    console.log("************my Data*********");
-    console.log(myCartData);
-    console.log("************my Data*********");
-  }, [myCartData]);
-
-  const onAllCheckHandler = () => {
-    setMyCartList((prev) =>
-      prev.map((item) => {
-        return { ...item, isChecked: !isAllCheck };
-      })
-    );
-
-    setIsAllCheck(!isAllCheck);
-  };
-
-  const onCheckHandler = (id, value) => {
-    setMyCartList((prev) =>
-      prev.map((item) =>
-        item.id == id ? { ...item, isChecked: !value } : item
-      )
-    );
-  };
-
-  const productUpdatedHandler = (e) => {
-    e.preventDefault();
-
-    console.log(e.target.name);
-  };
+  }, []);
 
   const addQuantityHandler = async (id, quantity) => {
     if (quantity <= 10) {
@@ -150,9 +59,7 @@ const MyCart = () => {
     }
   };
 
-  const onDeleteHanlder = (id) => {
-    setMyCartList((prev) => prev.filter((item) => item.id !== id));
-  };
+  const onDeleteHanlder = (id) => {};
 
   return (
     <>
@@ -176,13 +83,6 @@ const MyCart = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>
-                      <Checkbox
-                        value={isAllCheck}
-                        checked={isAllCheck}
-                        onChange={onAllCheckHandler}
-                      />
-                    </TableCell>
-                    <TableCell>
                       <Typography>Product</Typography>
                     </TableCell>
                     <TableCell align="center">
@@ -202,16 +102,6 @@ const MyCart = () => {
                 <TableBody>
                   {myCartData.map((e, index) => (
                     <TableRow>
-                      <TableCell>
-                        <Checkbox
-                          key={e.id}
-                          value={e.isChecked}
-                          checked={e.isChecked}
-                          onChange={(element) =>
-                            onCheckHandler(e.id, e.isChecked)
-                          }
-                        />
-                      </TableCell>
                       <TableCell>
                         <Box sx={{ display: "flex", gap: 2 }}>
                           <Box
@@ -294,7 +184,7 @@ const MyCart = () => {
                   ))}
                 </TableBody>
               </Table>
-              {myCartList.length === 0 && (
+              {myCartData.length === 0 && (
                 <Box
                   sx={{
                     height: "100%",
@@ -340,7 +230,16 @@ const MyCart = () => {
               >
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography>Subtotal</Typography>
-                  <Typography>${subtotal}</Typography>
+                  <Typography>
+                    $
+                    {Math.ceil(
+                      myCartData.reduce((total, item) => {
+                        return total + item.price * item.quantity;
+                      }, 0) * 100
+                    ) /
+                      100 +
+                      shippingCharge}
+                  </Typography>
                 </Box>
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -362,7 +261,14 @@ const MyCart = () => {
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography>Total</Typography>
-                  <Typography>${total}</Typography>
+                  <Typography>
+                    $
+                    {Math.ceil(
+                      myCartData.reduce((total, item) => {
+                        return total + item.price * item.quantity;
+                      }, 0) * 100
+                    ) / 100}
+                  </Typography>
                 </Box>
                 <Divider />
                 <Button variant="contained">

@@ -2,7 +2,7 @@ import { MyCartAction } from "../constant/mycart";
 
 const initialState = {
   myCartData: [],
-  unCheckedProduct: [],
+  shippingCharge: 0,
   error: "",
 };
 
