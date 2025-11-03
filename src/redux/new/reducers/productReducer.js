@@ -3,6 +3,7 @@ import { productAction } from "../constant/productAction";
 const initialState = {
   bestSellerProduct: [],
   newProduct: [],
+  favoriteProduct: [],
 };
 
 export const productReducer = (state = initialState, action) => {
