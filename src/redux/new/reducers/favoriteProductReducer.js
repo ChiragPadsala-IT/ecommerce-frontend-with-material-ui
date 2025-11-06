@@ -17,6 +17,7 @@ export const favoriteReducer = (state = intialState, action) => {
     case FavoriteProductAction.ERROR:
       return {
         ...state,
+        isProductAdded: false,
         errorMessage: action.errorMessage && "Something wrong",
       };
     default:

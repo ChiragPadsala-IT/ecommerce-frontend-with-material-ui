@@ -3,7 +3,7 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
 import IconButton from "@mui/material/IconButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductDetailsDialog from "./ProductDetailsDialog";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartData } from "../redux/new/actions/mycartAction";
@@ -24,9 +24,8 @@ const ProductCard = ({ props }) => {
 
     if (isProductAdded) {
       alert("Item Added successfully");
+      setIsOpenProductDetailModel(false);
     }
-
-    setIsOpenProductDetailModel(false);
   };
 
   const onViewProductDetailsModelHandler = (val) => {
@@ -47,6 +46,7 @@ const ProductCard = ({ props }) => {
         quantity: itemCount,
       })
     );
+
     console.log(id, itemCount);
   };
 
