@@ -9,6 +9,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ProductDetailsDialog from "./ProductDetailsDialog";
 import { useDispatch } from "react-redux";
 import { addToCartData } from "../redux/new/actions/mycartAction";
+import { addToFavoriteProduct } from "../redux/new/actions/favoriteProductAction";
 
 const ProductCard = ({ props }) => {
   const dispatch = useDispatch();
@@ -20,16 +21,8 @@ const ProductCard = ({ props }) => {
 
   const onHoverHandler = (val) => setIsHover(val);
 
-  const onFavoriteHandler = (e) => {
-    e.preventDefault();
-
-    if (isOpenProductDetailModel) {
-      setIsOpenProductDetailModel(false);
-      setIsFavorite(true);
-    } else {
-      setIsFavorite(!isFavorite);
-    }
-  };
+  const onFavoriteHandler = (productId) =>
+    dispatch(addToFavoriteProduct(productId));
 
   const onViewProductDetailsModelHandler = (val) => {
     setIsOpenProductDetailModel(val);
@@ -84,7 +77,7 @@ const ProductCard = ({ props }) => {
           />
           {isHover ? (
             <>
-              <IconButton
+              {/* <IconButton
                 sx={{ position: "absolute", top: "4%", right: "7%" }}
                 onClick={onFavoriteHandler}
               >
@@ -93,9 +86,9 @@ const ProductCard = ({ props }) => {
                 ) : (
                   <FavoriteBorderIcon />
                 )}
-              </IconButton>
+              </IconButton> */}
               <IconButton
-                sx={{ position: "absolute", top: "15%", right: "7%" }}
+                sx={{ position: "absolute", top: "5%", right: "7%" }}
                 onClick={() => onViewProductDetailsModelHandler(true)}
               >
                 <ZoomOutMapIcon />

@@ -235,7 +235,7 @@ const ProductDetailsDialog = ({
               <Button
                 variant="outlined"
                 sx={{ display: "flex", gap: 1, p: "0.5em 1em" }}
-                onClick={onFavoriteHandler}
+                onClick={() => onFavoriteHandler(productdetails._id)}
               >
                 <FavoriteIcon sx={{ fontSize: "1.5em" }} />
                 <Typography sx={{ fontSize: "0.9em" }}>

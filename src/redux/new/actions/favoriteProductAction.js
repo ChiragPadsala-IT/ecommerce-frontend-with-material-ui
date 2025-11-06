@@ -23,3 +23,29 @@ export const getFavoriteProduct = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const addToFavoriteProduct = (productId) => async (dispatch) => {
+  try {
+    const res = await fetch(FavoriteProductApi.addToFavoriteProduct, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ productId: productId }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      dispatch({ type: FavoriteProductAction.ADD_FAVORITE_PRODUCT });
+    } else {
+      dispatch({
+        type: FavoriteProductAction.ERROR,
+        errorMessage: data.message,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
