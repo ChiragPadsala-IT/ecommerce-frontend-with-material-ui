@@ -5,7 +5,9 @@ export const getCartData = () => async (dispatch) => {
   try {
     const res = await fetch(MyCartApi.getCartData, {
       method: "GET",
-      credentials: "include",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
     });
 
     const data = await res.json();
@@ -20,9 +22,11 @@ export const addToCartData = (product) => async (dispatch) => {
   try {
     const res = await fetch(MyCartApi.addToCart, {
       method: "POST",
-      headers: { "Content-type": "application/json" },
+      headers: {
+        "Content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
       body: JSON.stringify(product),
-      credentials: "include",
     });
 
     const data = await res.json();
