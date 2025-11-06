@@ -195,7 +195,7 @@ const ProductDetailsDialog = ({
             </Box>
             <Box
               sx={{
-                background: productdetails.inStock
+                background: productdetails.itemCount
                   ? "rgba(147, 212, 158, 1)"
                   : "rgba(212, 163, 147, 1)",
                 width: "fit-content",
@@ -205,12 +205,12 @@ const ProductDetailsDialog = ({
             >
               <Typography
                 sx={{
-                  color: productdetails.inStock ? "green" : "red",
+                  color: productdetails.itemCount ? "green" : "red",
                   fontSize: "0.8em",
                   letterSpacing: 1,
                 }}
               >
-                {productdetails.inStock ? "In Stock" : "Out of Stock"}
+                {productdetails.itemCount > 0 ? "In Stock" : "Out of Stock"}
               </Typography>
             </Box>
             <Typography>{productdetails.desc}</Typography>

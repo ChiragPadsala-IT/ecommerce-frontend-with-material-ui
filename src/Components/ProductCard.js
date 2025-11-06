@@ -107,8 +107,8 @@ const ProductCard = ({ props }) => {
         </Box>
         <Box sx={{ p: "0.7em" }}>
           <Typography variant="h6">{props.name}</Typography>
-          <Typography sx={{ color: props.inStock ? "green" : "red" }}>
-            {props.inStock ? "In Stock" : "Not Available"}
+          <Typography sx={{ color: props.itemCount > 0 ? "green" : "red" }}>
+            {props.itemCount > 0 ? "In Stock" : "Not Available"}
           </Typography>
           <Rating
             defaultValue={props.rating}
