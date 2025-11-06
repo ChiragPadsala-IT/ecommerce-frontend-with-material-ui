@@ -19,7 +19,7 @@ export const favoriteReducer = (state = intialState, action) => {
       return {
         ...state,
         isProductAdded: false,
-        errorMessage: action.errorMessage && "Something wrong",
+        errorMessage: action.errorMessage || "Something wrong",
       };
     default:
       return state;

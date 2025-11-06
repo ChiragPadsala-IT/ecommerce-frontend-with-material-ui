@@ -39,6 +39,7 @@ export const addToFavoriteProduct = (productId) => async (dispatch) => {
 
     if (data.success) {
       dispatch({ type: FavoriteProductAction.ADD_FAVORITE_PRODUCT });
+      alert("Item Added successfully");
     } else {
       dispatch({
         type: FavoriteProductAction.ERROR,

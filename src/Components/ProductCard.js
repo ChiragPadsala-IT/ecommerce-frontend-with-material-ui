@@ -21,11 +21,7 @@ const ProductCard = ({ props }) => {
 
   const onFavoriteHandler = (productId) => {
     dispatch(addToFavoriteProduct(productId));
-
-    if (isProductAdded) {
-      alert("Item Added successfully");
-      setIsOpenProductDetailModel(false);
-    }
+    setIsOpenProductDetailModel(false);
   };
 
   const onViewProductDetailsModelHandler = (val) => {

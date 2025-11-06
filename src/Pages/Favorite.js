@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Divider,
   Grid,
   Typography,
 } from "@mui/material";
@@ -15,6 +16,7 @@ import {
   removeFavoriteProduct,
 } from "../redux/new/actions/favoriteProductAction";
 import { addToCartData } from "../redux/new/actions/mycartAction";
+import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
 
 const Favorite = () => {
   const { favoriteProduct } = useSelector((state) => state.favoriteReducer);
@@ -42,71 +44,97 @@ const Favorite = () => {
         >
           Your Favorite Products
         </Typography>
-        <Grid container spacing={3} justifyContent={"center"}>
-          {favoriteProduct.map((item) => (
-            <Grid item xs={12} sm={6} md={4} key={item._id}>
-              <Card
-                sx={{
-                  //   position: "relative",
-                  //   height: 300,
-                  width: 300,
-                  borderRadius: 3,
-                  boxShadow: 3,
-                  transition: "0.3s",
-                  "&:hover": { transform: "scale(1.03)" },
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  py: "5px",
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  //   height="180"
-                  image={item.image || "/placeholder.png"}
-                  alt={item.name}
+        <Divider sx={{ borderBottomWidth: 1, borderColor: "black" }} />
+
+        {!(favoriteProduct.length > 0) ? (
+          <Box
+            sx={{
+              height: "50vh",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
+            <RemoveShoppingCartIcon sx={{ scale: 2 }} color="error" />
+            <Typography
+              sx={{
+                fontSize: "20px",
+                fontWeight: "500",
+                letterSpacing: 1,
+              }}
+            >
+              You don't have any product in Favorite Cart
+            </Typography>
+          </Box>
+        ) : (
+          <Grid container spacing={3} justifyContent={"center"}>
+            {favoriteProduct.map((item) => (
+              <Grid item xs={12} sm={6} md={4} key={item._id}>
+                <Card
                   sx={{
-                    width: "100%",
-                    height: 160,
-                    objectFit: "contain",
-                    borderTopLeftRadius: 12,
-                    borderTopRightRadius: 12,
+                    //   position: "relative",
+                    //   height: 300,
+                    width: 300,
+                    borderRadius: 3,
+                    boxShadow: 3,
+                    transition: "0.3s",
+                    "&:hover": { transform: "scale(1.03)" },
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    py: "5px",
                   }}
-                />
-                <CardContent>
-                  <Typography>{item.name}</Typography>
-                  <Typography>${item.price?.toFixed(2)}</Typography>
-                </CardContent>
-                <Box sx={{ display: "flex", gap: 1, px: "5px" }}>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    sx={{ width: "50%" }}
-                    onClick={() => dispatch(removeFavoriteProduct(item._id))}
-                  >
-                    Remove
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    color="success"
-                    sx={{ width: "50%" }}
-                    onClick={() => {
-                      dispatch(
-                        addToCartData({
-                          productId: item._id,
-                          quantity: 1,
-                        })
-                      );
-                      dispatch(removeFavoriteProduct(item._id));
+                >
+                  <CardMedia
+                    component="img"
+                    //   height="180"
+                    image={item.image || "/placeholder.png"}
+                    alt={item.name}
+                    sx={{
+                      width: "100%",
+                      height: 160,
+                      objectFit: "contain",
+                      borderTopLeftRadius: 12,
+                      borderTopRightRadius: 12,
                     }}
-                  >
-                    Add to Cart
-                  </Button>
-                </Box>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+                  />
+                  <CardContent>
+                    <Typography>{item.name}</Typography>
+                    <Typography>${item.price?.toFixed(2)}</Typography>
+                  </CardContent>
+                  <Box sx={{ display: "flex", gap: 1, px: "5px" }}>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      sx={{ width: "50%" }}
+                      onClick={() => dispatch(removeFavoriteProduct(item._id))}
+                    >
+                      Remove
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      sx={{ width: "50%" }}
+                      onClick={() => {
+                        dispatch(
+                          addToCartData({
+                            productId: item._id,
+                            quantity: 1,
+                          })
+                        );
+                        dispatch(removeFavoriteProduct(item._id));
+                      }}
+                    >
+                      Add to Cart
+                    </Button>
+                  </Box>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Box>
     </>
   );
