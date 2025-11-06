@@ -49,3 +49,32 @@ export const addToFavoriteProduct = (productId) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const removeFavoriteProduct = (productId) => async (dispatch) => {
+  try {
+    const res = await fetch(FavoriteProductApi.removeFavoriteProduct, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ productId: productId }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      dispatch({
+        type: FavoriteProductAction.REMOVE_FAVORITE_PRODUCT,
+        data: data.favoriteList.favorites,
+      });
+    } else {
+      dispatch({
+        type: FavoriteProductAction.ERROR,
+        errorMessage: data.message,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

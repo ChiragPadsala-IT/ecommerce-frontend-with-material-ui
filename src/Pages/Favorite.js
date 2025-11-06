@@ -10,7 +10,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getFavoriteProduct } from "../redux/new/actions/favoriteProductAction";
+import {
+  getFavoriteProduct,
+  removeFavoriteProduct,
+} from "../redux/new/actions/favoriteProductAction";
+import { addToCartData } from "../redux/new/actions/mycartAction";
 
 const Favorite = () => {
   const { favoriteProduct } = useSelector((state) => state.favoriteReducer);
@@ -38,12 +42,7 @@ const Favorite = () => {
         >
           Your Favorite Products
         </Typography>
-        <Grid
-          container
-          spacing={3}
-          sx={{ background: "yellow" }}
-          justifyContent={"center"}
-        >
+        <Grid container spacing={3} justifyContent={"center"}>
           {favoriteProduct.map((item) => (
             <Grid item xs={12} sm={6} md={4} key={item._id}>
               <Card
@@ -83,6 +82,7 @@ const Favorite = () => {
                     variant="outlined"
                     color="error"
                     sx={{ width: "50%" }}
+                    onClick={() => dispatch(removeFavoriteProduct(item._id))}
                   >
                     Remove
                   </Button>
@@ -90,6 +90,15 @@ const Favorite = () => {
                     variant="outlined"
                     color="success"
                     sx={{ width: "50%" }}
+                    onClick={() => {
+                      dispatch(
+                        addToCartData({
+                          productId: item._id,
+                          quantity: 1,
+                        })
+                      );
+                      dispatch(removeFavoriteProduct(item._id));
+                    }}
                   >
                     Add to Cart
                   </Button>

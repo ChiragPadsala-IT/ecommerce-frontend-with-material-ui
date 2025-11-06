@@ -9,6 +9,7 @@ const intialState = {
 export const favoriteReducer = (state = intialState, action) => {
   switch (action.type) {
     case FavoriteProductAction.GET_FAVORITE_PRODUCT:
+    case FavoriteProductAction.REMOVE_FAVORITE_PRODUCT:
       return { ...state, favoriteProduct: action.data };
 
     case FavoriteProductAction.ADD_FAVORITE_PRODUCT:
