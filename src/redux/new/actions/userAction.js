@@ -11,8 +11,8 @@ export const login = (userCredential) => async (dispatch) => {
 
     const data = await res.json();
 
-    console.log(data);
     if (data.success) {
+      localStorage.setItem("token", data.token);
       dispatch({ type: userAction.LOGIN, data: data });
     }
   } catch (error) {
