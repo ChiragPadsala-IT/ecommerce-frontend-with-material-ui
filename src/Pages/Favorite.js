@@ -26,10 +26,6 @@ const Favorite = () => {
     dispatch(getFavoriteProduct());
   });
 
-  const onAddToCartHandler = (id) => {
-    // dispatch();
-  };
-
   return (
     <>
       <Header />
