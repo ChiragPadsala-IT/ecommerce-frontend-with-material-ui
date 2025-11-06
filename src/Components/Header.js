@@ -65,7 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
-  const user = useSelector((state) => state.user);
+  const { isLogin, email } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
 
   const [country, setCountry] = React.useState("");
@@ -197,10 +197,8 @@ const Header = () => {
               }}
             />
 
-            {user.isUserLogin ? (
-              <Avatar sx={{ fontWeight: 700 }}>
-                {user.email[0].toUpperCase()}
-              </Avatar>
+            {isLogin ? (
+              <Avatar sx={{ fontWeight: 700 }}>{email[0].toUpperCase()}</Avatar>
             ) : (
               <Link component={RouterLink} to="/login">
                 <Avatar

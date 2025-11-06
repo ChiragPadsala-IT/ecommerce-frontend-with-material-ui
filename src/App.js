@@ -7,23 +7,17 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { UserApi } from "./Api/user";
 import { useDispatch } from "react-redux";
-import { login } from "./redux/user/userSlice";
 
 function App() {
-  console.log("*****************************");
-  console.log("I am from App");
-  console.log(Cookies.get("token"));
-  console.log("*****************************");
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(UserApi.isLogedIn, { method: "POST", credentials: "include" })
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(login({ isUserLogin: true, email: data.user.email }));
-      })
-      .catch((error) => {});
+    // fetch(UserApi.isLogedIn, { method: "POST", credentials: "include" })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     dispatch(login({ isUserLogin: true, email: data.user.email }));
+    //   })
+    //   .catch((error) => {});
   }, []);
 
   return (

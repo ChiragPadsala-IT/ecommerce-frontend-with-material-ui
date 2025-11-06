@@ -19,7 +19,6 @@ import React, { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserApi } from "../Api/user";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/user/userSlice";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -155,7 +154,7 @@ const SignUp = () => {
       if (!data.success) {
         setVerificationMessage(data.message);
       } else {
-        dispatch(login({ isUserLogin: true, email: userCredential.email }));
+        // dispatch(login({ isUserLogin: true, email: userCredential.email }));
         navigate("/");
       }
     } catch (error) {

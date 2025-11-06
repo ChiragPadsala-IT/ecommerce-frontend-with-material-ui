@@ -1,0 +1,6 @@
+export const userAction = {
+  LOGIN: "LOGIN",
+  SIGN_OUT: "SIGN_OUT",
+  FORGOT_PASSWORD: "FORGOT_PASSWORD",
+  RESET_PASSWORD: "RESET_PASSWORD",
+};

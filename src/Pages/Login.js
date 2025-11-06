@@ -12,11 +12,12 @@ import googleLogo from "../Assets/Logos/google_logo.png";
 import facebookLogo from "../Assets/Logos/facebook_logo.png";
 import loginBg from "../Assets/Images/loginbg.webp";
 import validator from "validator";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { UserApi } from "../Api/user";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/user/userSlice";
+import { login } from "../redux/new/actions/userAction";
+// import { login } from "../redux/user/userSlice";
 
 const Login = () => {
   const [userCredential, setUserCredential] = useState({
@@ -26,10 +27,16 @@ const Login = () => {
 
   const [error, setError] = useState({ email: "", password: "" });
 
-  const user = useSelector((state) => state.user);
+  const { isLogin } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate("/");
+    }
+  }, [isLogin]);
 
   const onUserCredentialHandler = (e) => {
     e.preventDefault();
@@ -75,26 +82,7 @@ const Login = () => {
       });
 
       try {
-        const res = await fetch(UserApi.login, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(userCredential),
-          credentials: "include",
-        });
-        const data = await res.json();
-
-        console.log(data.success);
-        console.log(res.headers.entries());
-
-        const userEmail = userCredential.email;
-
-        // setUserCredential({
-        //   email: "",
-        //   password: "",
-        // });
-
-        dispatch(login({ isUserLogin: true, email: userEmail }));
-        navigate("/");
+        dispatch(login(userCredential));
       } catch (err) {
         console.log("*******************************");
         console.log(err);

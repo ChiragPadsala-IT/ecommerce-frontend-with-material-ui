@@ -21,7 +21,7 @@ const Favorite = () => {
   });
 
   const onAddToCartHandler = (id) => {
-    dispatch();
+    // dispatch();
   };
 
   return (

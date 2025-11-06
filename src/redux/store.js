@@ -1,12 +1,13 @@
 import { configureStore, compose, applyMiddleware } from "@reduxjs/toolkit";
-import userReducer from "./user/userSlice";
+import { userReducer } from "./new/reducers/userReducer";
 import { cartReducer } from "./new/reducers/mycartReducer";
 import { productReducer } from "../redux/new/reducers/productReducer";
 import { favoriteReducer } from "./new/reducers/favoriteProductReducer";
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
+    // user: userReducer,
+    userReducer: userReducer,
     productReducer: productReducer,
     cartReducer: cartReducer,
     favoriteReducer: favoriteReducer,
