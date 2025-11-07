@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { Header } from "../Components";
-import {
-  Box,
-  Button,
-  FilledInput,
-  FormControl,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 
@@ -21,6 +13,14 @@ const ContactUs = () => {
     message: "",
   });
 
+  const [error, setError] = useState({
+    name: "",
+    email: "",
+    countryCode: "",
+    phone: "",
+    message: "",
+  });
+
   const onContactInfoHanlder = (e) => {
     e.preventDefault();
 
@@ -30,6 +30,40 @@ const ContactUs = () => {
         [e.target.name]: e.target.value,
       };
     });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+
+    if (!(contactInfo.name.length > 0)) {
+      setError((prev) => {
+        return { ...prev, name: "Name is Required" };
+      });
+    }
+
+    if (!(contactInfo.email.length > 0)) {
+      setError((prev) => {
+        return { ...prev, email: "Email id required" };
+      });
+    }
+
+    if (!(contactInfo.countryCode !== null)) {
+      setError((prev) => {
+        return { ...prev, countryCode: "Country code required" };
+      });
+    }
+
+    if (!(contactInfo.phone !== null)) {
+      setError((prev) => {
+        return { ...prev, phone: "Phone number is required" };
+      });
+    }
+
+    if (!(contactInfo.message.length > 0)) {
+      setError((prev) => {
+        return { ...prev, message: "Message is required" };
+      });
+    }
   };
 
   return (
@@ -59,6 +93,7 @@ const ContactUs = () => {
         <Box
           component="form"
           noValidate
+          onSubmit={onSubmitHandler}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -95,6 +130,13 @@ const ContactUs = () => {
                 value={contactInfo.name}
                 onChange={onContactInfoHanlder}
                 required
+                helperText={
+                  error.name.length > 0 && (
+                    <Typography sx={{ color: "red", fontSize: "14px" }}>
+                      {error.name}
+                    </Typography>
+                  )
+                }
               />
               <TextField
                 label="Email"
@@ -104,6 +146,13 @@ const ContactUs = () => {
                 value={contactInfo.email}
                 onChange={onContactInfoHanlder}
                 required
+                helperText={
+                  error.email.length > 0 && (
+                    <Typography sx={{ color: "red", fontSize: "14px" }}>
+                      {error.email}
+                    </Typography>
+                  )
+                }
               />
               <Grid gap={2} display={"flex"}>
                 <TextField
@@ -112,9 +161,16 @@ const ContactUs = () => {
                   name="phone"
                   type="number"
                   value={contactInfo.countryCode}
-                  inputProps={{ maxlength: 4 }}
+                  inputProps={{ maxLength: 4 }}
                   onChange={onContactInfoHanlder}
                   required
+                  helperText={
+                    error.countryCode.length > 0 && (
+                      <Typography sx={{ color: "red", fontSize: "14px" }}>
+                        {error.countryCode}
+                      </Typography>
+                    )
+                  }
                 />
                 <TextField
                   label="Phone no."
@@ -122,10 +178,17 @@ const ContactUs = () => {
                   type="number"
                   placeholder="Your Phone Number"
                   value={contactInfo.phone}
-                  inputProps={{ maxlength: 10 }}
+                  inputProps={{ maxLength: 10 }}
                   onChange={onContactInfoHanlder}
                   sx={{ width: "110%" }}
                   required
+                  helperText={
+                    error.phone.length > 0 && (
+                      <Typography sx={{ color: "red", fontSize: "14px" }}>
+                        {error.phone}
+                      </Typography>
+                    )
+                  }
                 />
               </Grid>
             </Grid>
@@ -138,17 +201,29 @@ const ContactUs = () => {
               <TextField
                 label="Message"
                 name="message"
-                placeholder="Write message"
+                placeholder="Write message in 2000 characters"
                 value={contactInfo.message}
                 onChange={onContactInfoHanlder}
+                inputProps={{ maxLength: 2000 }}
                 fullheight
                 multiline
                 minRows={7}
                 required
+                helperText={
+                  error.message.length > 0 && (
+                    <Typography sx={{ color: "red", fontSize: "14px" }}>
+                      {error.message}
+                    </Typography>
+                  )
+                }
               />
             </Grid>
           </Grid>
-          <Button variant="contained" sx={{ px: "3rem", letterSpacing: 2 }}>
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ px: "3rem", letterSpacing: 2 }}
+          >
             Submit
           </Button>
         </Box>
