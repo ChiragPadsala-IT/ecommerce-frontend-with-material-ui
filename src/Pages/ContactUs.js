@@ -3,6 +3,8 @@ import { Header } from "../Components";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+import { ContactUsApi } from "../Api/contactUs";
+import * as EmailValidator from "email-validator";
 
 const ContactUs = () => {
   const [contactInfo, setContactInfo] = useState({
@@ -24,16 +26,31 @@ const ContactUs = () => {
   const onContactInfoHanlder = (e) => {
     e.preventDefault();
 
-    setContactInfo((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
+    if (
+      (e.target.name == "countryCode" &&
+        e.target.value.toString().length <= 3) ||
+      (e.target.name == "phone" && e.target.value.toString().length <= 10) ||
+      (e.target.name !== "countryCode" && e.target.name !== "phone")
+    ) {
+      setContactInfo((prev) => {
+        return {
+          ...prev,
+          [e.target.name]: e.target.value,
+        };
+      });
+    }
   };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+
+    setError({
+      name: "",
+      email: "",
+      countryCode: "",
+      phone: "",
+      message: "",
+    });
 
     if (!(contactInfo.name.length > 0)) {
       setError((prev) => {
@@ -45,17 +62,30 @@ const ContactUs = () => {
       setError((prev) => {
         return { ...prev, email: "Email id required" };
       });
+    } else if (!EmailValidator.validate(contactInfo.email)) {
+      setError((prev) => {
+        return { ...prev, email: "Please enter valid email address" };
+      });
     }
 
-    if (!(contactInfo.countryCode !== null)) {
+    if (
+      !(contactInfo.countryCode !== null) ||
+      contactInfo.countryCode.toString().length == 0
+    ) {
       setError((prev) => {
         return { ...prev, countryCode: "Country code required" };
       });
     }
 
-    if (!(contactInfo.phone !== null)) {
+    if (
+      !(contactInfo.phone !== null) ||
+      contactInfo.phone.toString().length !== 10
+    ) {
       setError((prev) => {
-        return { ...prev, phone: "Phone number is required" };
+        return {
+          ...prev,
+          phone: "Phone number is required and must be in 10 digits",
+        };
       });
     }
 
@@ -63,6 +93,45 @@ const ContactUs = () => {
       setError((prev) => {
         return { ...prev, message: "Message is required" };
       });
+    }
+
+    if (
+      contactInfo.name.length > 0 &&
+      contactInfo.email.length > 0 &&
+      contactInfo.countryCode !== null &&
+      contactInfo.countryCode.toString().length > 0 &&
+      contactInfo.phone !== null &&
+      contactInfo.phone.toString().length == 10 &&
+      contactInfo.message.length > 0
+    ) {
+      setError({
+        name: "",
+        email: "",
+        countryCode: "",
+        phone: "",
+        message: "",
+      });
+
+      fetch(ContactUsApi.addToContactUs, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: contactInfo.name,
+          email: contactInfo.email,
+          phone:
+            "+" +
+            contactInfo.countryCode.toString() +
+            contactInfo.phone.toString(),
+          message: contactInfo.message,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.success);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -158,10 +227,10 @@ const ContactUs = () => {
                 <TextField
                   label="Country Code"
                   placeholder="+1"
-                  name="phone"
+                  name="countryCode"
                   type="number"
                   value={contactInfo.countryCode}
-                  inputProps={{ maxLength: 4 }}
+                  inputProps={{ maxLength: 3 }}
                   onChange={onContactInfoHanlder}
                   required
                   helperText={
