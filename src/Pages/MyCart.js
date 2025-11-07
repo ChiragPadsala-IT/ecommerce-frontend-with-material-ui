@@ -21,7 +21,7 @@ import React, { useEffect, useState } from "react";
 import { Header } from "../Components";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartData, getCartData } from "../redux/new/actions/mycartAction";
-import { yellow } from "@mui/material/colors";
+import { makeOrder } from "../redux/new/actions/orderAction";
 
 const MyCart = () => {
   const { myCartData, shippingCharge } = useSelector(
@@ -271,7 +271,13 @@ const MyCart = () => {
                   </Typography>
                 </Box>
                 <Divider />
-                <Button variant="contained">
+                <Button
+                  variant="contained"
+                  type="submit"
+                  onClick={() => {
+                    dispatch(makeOrder(myCartData));
+                  }}
+                >
                   Proceed To CheckOut <LogoutIcon sx={{ ml: 2, scale: 0.8 }} />
                 </Button>
               </Box>
