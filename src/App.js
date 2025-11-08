@@ -7,17 +7,14 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { UserApi } from "./Api/user";
 import { useDispatch } from "react-redux";
+import { isUserLogin } from "./redux/new/actions/userAction";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // fetch(UserApi.isLogedIn, { method: "POST", credentials: "include" })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     dispatch(login({ isUserLogin: true, email: data.user.email }));
-    //   })
-    //   .catch((error) => {});
+    dispatch(isUserLogin());
+    console.log("Hello chirag from app");
   }, []);
 
   return (

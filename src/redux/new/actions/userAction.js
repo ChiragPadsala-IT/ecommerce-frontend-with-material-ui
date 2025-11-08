@@ -19,3 +19,25 @@ export const login = (userCredential) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const isUserLogin = () => async (dispatch) => {
+  try {
+    const res = await fetch(UserApi.isLogedIn, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+    if (data.success) {
+      dispatch({ type: userAction.IS_LOGIN, data: data });
+    } else {
+      dispatch({ type: userAction.ERROR, data: data.messages });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
