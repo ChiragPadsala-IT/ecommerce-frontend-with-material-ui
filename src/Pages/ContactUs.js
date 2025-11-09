@@ -127,7 +127,14 @@ const ContactUs = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.success);
+          alert("Message sent successfully...");
+          setContactInfo({
+            name: "",
+            email: "",
+            countryCode: "",
+            phone: "",
+            message: "",
+          });
         })
         .catch((err) => {
           console.log(err);

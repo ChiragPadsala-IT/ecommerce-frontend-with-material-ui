@@ -20,7 +20,11 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import React, { useEffect, useState } from "react";
 import { Header } from "../Components";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartData, getCartData } from "../redux/new/actions/mycartAction";
+import {
+  addToCartData,
+  deleteCartData,
+  getCartData,
+} from "../redux/new/actions/mycartAction";
 import { makeOrder } from "../redux/new/actions/orderAction";
 
 const MyCart = () => {
@@ -59,7 +63,9 @@ const MyCart = () => {
     }
   };
 
-  const onDeleteHanlder = (id) => {};
+  const onDeleteHanlder = (id) => {
+    dispatch(deleteCartData(id));
+  };
 
   return (
     <>
@@ -175,7 +181,7 @@ const MyCart = () => {
                         <IconButton
                           key={e.id}
                           id={e.id}
-                          onClick={() => onDeleteHanlder(e.id)}
+                          onClick={() => onDeleteHanlder(e._id)}
                         >
                           <DeleteIcon sx={{ color: "red" }} />
                         </IconButton>
