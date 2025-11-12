@@ -1,18 +1,28 @@
 import Slider from "react-slick";
 import Box from "@mui/material/Box";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomeBannerImage } from "../redux/new/actions/adsAction";
 
 const ReactSlickSlider = () => {
-  const sliderImg = [
-    {
-      url: "https://t4.ftcdn.net/jpg/03/06/69/49/360_F_306694930_S3Z8H9Qk1MN79ZUe7bEWqTFuonRZdemw.jpg",
-    },
-    {
-      url: "https://static.vecteezy.com/system/resources/thumbnails/003/599/328/small_2x/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-vector.jpg",
-    },
-    {
-      url: "https://static.vecteezy.com/ti/vetor-gratis/t2/6828785-paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-pink-backgroud-for-banner-market-ecommerce-women-concept-gratis-vetor.jpg",
-    },
-  ];
+  // const homeBanner = [
+  //   {
+  //     url: "https://t4.ftcdn.net/jpg/03/06/69/49/360_F_306694930_S3Z8H9Qk1MN79ZUe7bEWqTFuonRZdemw.jpg",
+  //   },
+  //   {
+  //     url: "https://static.vecteezy.com/system/resources/thumbnails/003/599/328/small_2x/online-shopping-on-phone-buy-sell-business-digital-web-banner-application-money-advertising-payment-ecommerce-illustration-search-vector.jpg",
+  //   },
+  //   {
+  //     url: "https://static.vecteezy.com/ti/vetor-gratis/t2/6828785-paper-art-shopping-online-on-smartphone-and-new-buy-sale-promotion-pink-backgroud-for-banner-market-ecommerce-women-concept-gratis-vetor.jpg",
+  //   },
+  // ];
+
+  const { homeBanner } = useSelector((state) => state.adsReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getHomeBannerImage());
+  }, []);
 
   var settings = {
     dots: true,
@@ -37,7 +47,7 @@ const ReactSlickSlider = () => {
       }}
     >
       <Slider {...settings}>
-        {sliderImg.map((r, index) => (
+        {homeBanner.map((r, index) => (
           <Box
             key={index}
             sx={{ height: { xs: "50vw", sm: "35vw" }, width: "100%" }}
