@@ -4,6 +4,7 @@ import { cartReducer } from "./new/reducers/mycartReducer";
 import { productReducer } from "../redux/new/reducers/productReducer";
 import { favoriteReducer } from "./new/reducers/favoriteProductReducer";
 import { orderReducer } from "./new/reducers/orderReducer";
+import { adsReducer } from "./new/reducers/adsReducer";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     cartReducer: cartReducer,
     favoriteReducer: favoriteReducer,
     orderReducer: orderReducer,
+    adsReducer: adsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: true,
