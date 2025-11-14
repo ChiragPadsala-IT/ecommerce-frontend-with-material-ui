@@ -76,8 +76,6 @@ const Header = () => {
 
     const { value } = e.target;
 
-    console.log(value);
-
     setCountry(value);
   };
 

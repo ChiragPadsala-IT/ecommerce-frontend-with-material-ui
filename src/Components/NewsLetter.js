@@ -17,7 +17,6 @@ const NewsLetter = () => {
 
   const onEmailChnageHandler = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     setEmail(e.target.value);
   };
 
@@ -37,8 +36,6 @@ const NewsLetter = () => {
       setErrorHelperText("");
       setEmail("");
     }
-
-    console.log(e.target.value);
   };
 
   return (

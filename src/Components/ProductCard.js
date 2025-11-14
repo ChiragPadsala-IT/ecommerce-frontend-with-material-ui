@@ -42,8 +42,6 @@ const ProductCard = ({ props }) => {
         quantity: itemCount,
       })
     );
-
-    console.log(id, itemCount);
   };
 
   return (

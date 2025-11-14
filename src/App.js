@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     dispatch(isUserLogin());
-    console.log("Hello chirag from app");
   }, []);
 
   return (

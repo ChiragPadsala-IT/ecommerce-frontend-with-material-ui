@@ -21,7 +21,6 @@ const FilterProductDrawer = () => {
     setIsToggleDrawer(!isToggleDrawer);
   };
 
-  console.log(filterPrice);
   const onFilterPriceHandler = (e, newVal) => {
     e.preventDefault();
 
