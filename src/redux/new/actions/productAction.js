@@ -16,6 +16,6 @@ export const getBestSellerProduct = () => async (dispatch) => {
 
   dispatch({
     type: productAction.GET_BEST_SELLER_PRODUCT,
-    bestSellerProduct: data,
+    bestSellerProduct: data.products,
   });
 };
