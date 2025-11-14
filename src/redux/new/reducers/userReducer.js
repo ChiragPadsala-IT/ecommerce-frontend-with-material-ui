@@ -14,6 +14,9 @@ export const userReducer = (state = initialState, action) => {
 
     case userAction.ERROR:
       return { ...state, isLogin: false, email: "", error: action.data };
+
+    case userAction.SIGN_OUT:
+      return { isLogin: false, email: "", error: "" };
     default:
       return state;
   }

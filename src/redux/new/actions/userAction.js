@@ -40,3 +40,18 @@ export const isUserLogin = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const logout = () => async (dispatch) => {
+  try {
+    const res = await fetch(UserApi.logout);
+
+    const data = await res.json();
+
+    if (data.success) {
+      localStorage.removeItem("token");
+      dispatch({ type: userAction.SIGN_OUT });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
