@@ -1,3 +1,4 @@
+import { PaymentFailed, PaymentSuccess } from "../Components";
 import ContactUs from "../Pages/ContactUs";
 import Favorite from "../Pages/Favorite";
 import Home from "../Pages/Home";
@@ -35,5 +36,15 @@ export const routes = [
     name: "ContactUs",
     path: "/contact-us",
     page: <ContactUs />,
+  },
+  {
+    name: "PaymentSuccess",
+    path: "/payment-success",
+    page: <PaymentSuccess />,
+  },
+  {
+    name: "PaymentFailed",
+    path: "/payment-failed",
+    page: <PaymentFailed />,
   },
 ];

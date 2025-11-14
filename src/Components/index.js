@@ -11,6 +11,8 @@ import NewsLetter from "./NewsLetter";
 import HomePageSellingList from "./HomePageSellingList";
 import ProductDetailsDialog from "./ProductDetailsDialog";
 import FilterProductDrawer from "./FilterProductDrawer";
+import PaymentSuccess from "./PaymentSuccess";
+import PaymentFailed from "./PaymentFailed";
 
 export {
   Header,
@@ -26,4 +28,6 @@ export {
   CustomerCommentsCard,
   FeaturedCategories,
   ProductDetailsDialog,
+  PaymentSuccess,
+  PaymentFailed,
 };
