@@ -1,7 +1,4 @@
-import { loadStripe } from "@stripe/stripe-js";
-import { OrderAction } from "../constant/order";
 import { OrderApi } from "../../../Api/orderApi";
-import { useStripe } from "@stripe/react-stripe-js";
 
 export const makeOrder = (products) => async (dispatch) => {
   const updatedProducts = products.map(({ _id, ...rest }) => ({
@@ -20,7 +17,6 @@ export const makeOrder = (products) => async (dispatch) => {
 
   const data = await res.json();
 
-  console.log(data);
   if (data.success) {
     window.location.href = data.sessionUrl;
   }

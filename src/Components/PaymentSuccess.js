@@ -3,11 +3,8 @@ import { Box, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { OrderApi } from "../Api/orderApi";
-import { useSelector } from "react-redux";
 
 const PaymentSuccess = () => {
-  const { isLogin } = useSelector((state) => state.userReducer);
-
   useEffect(() => {
     fetch(`${OrderApi.paymentSuccess}${window.location.search}`, {
       method: "GET",

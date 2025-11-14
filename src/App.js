@@ -3,9 +3,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./Constants/routes";
 import Box from "@mui/material/Box";
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import { UserApi } from "./Api/user";
 import { useDispatch } from "react-redux";
 import { isUserLogin } from "./redux/new/actions/userAction";
 
@@ -14,7 +12,7 @@ function App() {
 
   useEffect(() => {
     dispatch(isUserLogin());
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

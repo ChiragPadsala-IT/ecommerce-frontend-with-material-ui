@@ -26,7 +26,7 @@ const NewsLetter = () => {
     // const { value } = e.target;
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
-    if (email.length == 0) {
+    if (email.length === 0) {
       setErrorHelperText("Email is required...");
       return;
     } else if (!emailRegex.test(email)) {
@@ -104,7 +104,7 @@ const NewsLetter = () => {
               SUBSCRIBE
             </Button>
           </Paper>
-          {errorHelperText != "" && (
+          {errorHelperText !== "" && (
             <FormHelperText
               sx={{
                 color: "red",
@@ -130,6 +130,7 @@ const NewsLetter = () => {
       >
         <img
           src={NewsLatterDiscountImg}
+          alt="New Latter"
           style={{ width: "90%", height: "80%" }}
         />
       </Box>
