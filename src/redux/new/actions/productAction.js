@@ -19,3 +19,26 @@ export const getBestSellerProduct = () => async (dispatch) => {
     bestSellerProduct: data.products,
   });
 };
+
+export const getProductByCategory = (categoryName) => async (dispatch) => {
+  try {
+    const res = await fetch(
+      `${ProductApi.productByCategory}?category=${categoryName}`
+    );
+
+    const data = await res.json();
+
+    console.log("Kem chhe lala");
+    console.log(data);
+    if (data.success) {
+      dispatch({
+        type: productAction.GET_PRODUCT_BY_CATEGORY,
+        data: data.products,
+      });
+    } else {
+      dispatch();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

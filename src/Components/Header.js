@@ -129,26 +129,23 @@ const Header = () => {
               sx={{
                 m: 1,
                 // minWidth: 120,
-                width: "100%",
+                width: "80%",
                 display: "flex",
                 // alignItems: "center",
               }}
             >
-              <InputLabel
+              {/* <InputLabel
                 id="demo-simple-select-helper-label"
                 style={{ fontSize: "0.7rem" }}
               >
                 Your Country
-              </InputLabel>
+              </InputLabel> */}
               <Select
                 lable="Select Country"
                 value={country}
                 onChange={selectCountryHandler}
               >
-                <MenuItem value={"US"}>US</MenuItem>
                 <MenuItem value={"Canada"}>Canada</MenuItem>
-                <MenuItem value={"India"}>India</MenuItem>
-                <MenuItem value={"Australia"}>Australia</MenuItem>
               </Select>
             </FormControl>
           </Container>

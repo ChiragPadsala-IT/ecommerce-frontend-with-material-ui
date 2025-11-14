@@ -4,6 +4,7 @@ const initialState = {
   bestSellerProduct: [],
   newProduct: [],
   favoriteProduct: [],
+  categoryWiseProduct: [],
 };
 
 export const productReducer = (state = initialState, action) => {
@@ -18,6 +19,12 @@ export const productReducer = (state = initialState, action) => {
       return {
         ...state,
         bestSellerProduct: action.bestSellerProduct,
+      };
+
+    case productAction.GET_PRODUCT_BY_CATEGORY:
+      return {
+        ...state,
+        categoryWiseProduct: action.data,
       };
 
     default:

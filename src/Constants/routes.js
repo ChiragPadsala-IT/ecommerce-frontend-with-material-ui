@@ -5,6 +5,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import MyCart from "../Pages/MyCart";
 import SignUp from "../Pages/SignUp";
+import CategoryWiseProductView from "../Pages/CategoryWiseProductView";
 
 export const routes = [
   {
@@ -46,5 +47,10 @@ export const routes = [
     name: "PaymentFailed",
     path: "/payment-failed",
     page: <PaymentFailed />,
+  },
+  {
+    name: "Category",
+    path: "/category",
+    page: <CategoryWiseProductView />,
   },
 ];

@@ -31,7 +31,6 @@ export const isUserLogin = () => async (dispatch) => {
 
     const data = await res.json();
 
-    console.log(data);
     if (data.success) {
       dispatch({ type: userAction.IS_LOGIN, data: data });
     } else {

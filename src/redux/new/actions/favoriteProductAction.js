@@ -13,8 +13,6 @@ export const getFavoriteProduct = () => async (dispatch) => {
 
     const data = await res.json();
 
-    console.log(data.products);
-
     dispatch({
       type: FavoriteProductAction.GET_FAVORITE_PRODUCT,
       data: data.products.favorites,

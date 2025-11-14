@@ -8,6 +8,7 @@ import ProductDetailsDialog from "./ProductDetailsDialog";
 import { useDispatch } from "react-redux";
 import { addToCartData } from "../redux/new/actions/mycartAction";
 import { addToFavoriteProduct } from "../redux/new/actions/favoriteProductAction";
+import { Stack } from "@mui/material";
 
 const ProductCard = ({ props }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const ProductCard = ({ props }) => {
   };
 
   return (
-    <>
+    <div>
       <Box
         onMouseEnter={() => onHoverHandler(true)}
         onMouseLeave={() => onHoverHandler(false)}
@@ -66,16 +67,20 @@ const ProductCard = ({ props }) => {
             justifyContent: "center",
           }}
         >
-          <img
-            src={props.image}
-            alt={props.name}
-            style={{
-              width: "50%",
-            }}
-          />
-          {isHover ? (
-            <>
-              {/* <IconButton
+          <Stack position="relative">
+            <img
+              src={props.image}
+              alt={props.name}
+              style={{
+                width: "50%",
+                display: "block",
+                margin: "0 auto",
+              }}
+            />
+            <Box position={"absolute"} top={10} right={10}>
+              {isHover ? (
+                <>
+                  {/* <IconButton
                 sx={{ position: "absolute", top: "4%", right: "7%" }}
                 onClick={onFavoriteHandler}
               >
@@ -85,16 +90,17 @@ const ProductCard = ({ props }) => {
                   <FavoriteBorderIcon />
                 )}
               </IconButton> */}
-              <IconButton
-                sx={{ position: "absolute", top: "5%", right: "7%" }}
-                onClick={() => onViewProductDetailsModelHandler(true)}
-              >
-                <ZoomOutMapIcon />
-              </IconButton>
-            </>
-          ) : (
-            <></>
-          )}
+                  <IconButton
+                    onClick={() => onViewProductDetailsModelHandler(true)}
+                  >
+                    <ZoomOutMapIcon />
+                  </IconButton>
+                </>
+              ) : (
+                <></>
+              )}
+            </Box>
+          </Stack>
         </Box>
         <Box sx={{ p: "0.7em" }}>
           <Typography variant="h6">{props.name}</Typography>
@@ -140,7 +146,7 @@ const ProductCard = ({ props }) => {
           onFavoriteHandler={onFavoriteHandler}
         />
       )}
-    </>
+    </div>
   );
 };
 

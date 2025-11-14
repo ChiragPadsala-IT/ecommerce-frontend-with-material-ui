@@ -5,8 +5,10 @@ import "react-multi-carousel/lib/styles.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { IconButton } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useNavigate } from "react-router-dom";
 
 const FeaturedCategories = () => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -69,7 +71,9 @@ const FeaturedCategories = () => {
                 gap: 1,
                 cursor: "pointer",
               }}
-              onClick={() => {}}
+              onClick={() => {
+                navigate(`/category?name=${e.name.toLowerCase()}`);
+              }}
             >
               <img
                 src={e.image}
