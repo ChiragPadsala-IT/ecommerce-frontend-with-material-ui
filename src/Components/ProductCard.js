@@ -5,13 +5,15 @@ import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import ProductDetailsDialog from "./ProductDetailsDialog";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCartData } from "../redux/new/actions/mycartAction";
 import { addToFavoriteProduct } from "../redux/new/actions/favoriteProductAction";
 import { Stack } from "@mui/material";
 
 const ProductCard = ({ props }) => {
   const dispatch = useDispatch();
+
+  const { isLogin } = useSelector((state) => state.userReducer);
 
   const [isHover, setIsHover] = useState(false);
   const [isOpenProductDetailModel, setIsOpenProductDetailModel] =
@@ -20,7 +22,11 @@ const ProductCard = ({ props }) => {
   const onHoverHandler = (val) => setIsHover(val);
 
   const onFavoriteHandler = (productId) => {
-    dispatch(addToFavoriteProduct(productId));
+    if (isLogin) {
+      dispatch(addToFavoriteProduct(productId));
+    } else {
+      alert("Please login");
+    }
     setIsOpenProductDetailModel(false);
   };
 
@@ -36,12 +42,17 @@ const ProductCard = ({ props }) => {
   const onAddToCartHandler = (id, itemCount, e) => {
     e.preventDefault();
 
-    dispatch(
-      addToCartData({
-        productId: id,
-        quantity: itemCount,
-      })
-    );
+    if (isLogin) {
+      dispatch(
+        addToCartData({
+          productId: id,
+          quantity: itemCount,
+        })
+      );
+    } else {
+      alert("Please login");
+    }
+    setIsOpenProductDetailModel(false);
   };
 
   return (
