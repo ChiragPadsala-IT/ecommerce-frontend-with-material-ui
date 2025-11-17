@@ -64,7 +64,11 @@ const HomePageSellingList = ({ advertiseImg, ...props }) => {
             <Button
               variant="outlined"
               onClick={() => {
-                navigate(`/category?name=bestseller`);
+                navigate(
+                  `/category?name=${
+                    props.title === "Best Seller" ? "bestseller" : "newproduct"
+                  }`
+                );
               }}
             >
               <Typography sx={{ fontSize: "0.82em", mr: "5px" }}>
