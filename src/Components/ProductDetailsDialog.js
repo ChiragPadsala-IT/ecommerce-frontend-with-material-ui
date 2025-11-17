@@ -117,45 +117,14 @@ const ProductDetailsDialog = ({
                 mb: "2em",
               }}
             >
-              {imageList.map(
-                (e, index) =>
-                  index === imageShowNumber && (
-                    <img
-                      // src="https://m.media-amazon.com/images/I/61GpT8+nFXL._UY900_.jpg"
-                      src={e}
-                      alt=""
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                  )
-              )}
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
-              {imageList.map((e, index) => {
-                return (
-                  <Box
-                    sx={{
-                      height: "50px",
-                      width: "50px",
-                      border: "1px solid ",
-                      borderColor:
-                        imageShowNumber == index
-                          ? "rgba(76, 103, 202, 1)"
-                          : "rgba(236, 227, 227, 1)",
-                      padding: "2px",
-                      cursor: "pointer",
-                    }}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      onImageHandler(index);
-                    }}
-                  >
-                    <img src={e} style={{ height: "100%", width: "100%" }} />
-                  </Box>
-                );
-              })}
+              <img
+                src={productdetails.image}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+              />
             </Box>
           </Box>
           <Box
