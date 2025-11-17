@@ -5,7 +5,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import MyCart from "../Pages/MyCart";
 import SignUp from "../Pages/SignUp";
-import CategoryWiseProductView from "../Pages/CategoryWiseProductView";
+import ProductView from "../Pages/ProductView";
 
 export const routes = [
   {
@@ -51,6 +51,6 @@ export const routes = [
   {
     name: "Category",
     path: "/category",
-    page: <CategoryWiseProductView />,
+    page: <ProductView />,
   },
 ];

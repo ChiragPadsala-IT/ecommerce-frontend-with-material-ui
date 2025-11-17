@@ -7,8 +7,11 @@ import "react-multi-carousel/lib/styles.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { IconButton } from "@mui/material";
 import ProductCard from "./ProductCard";
+import { useNavigate } from "react-router-dom";
 
 const HomePageSellingList = ({ advertiseImg, ...props }) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -58,7 +61,12 @@ const HomePageSellingList = ({ advertiseImg, ...props }) => {
             <Typography sx={{ fontWeight: "300" }}>{props.desc}</Typography>
           </Box>
           <Box>
-            <Button variant="outlined">
+            <Button
+              variant="outlined"
+              onClick={() => {
+                navigate(`/category?name=bestseller`);
+              }}
+            >
               <Typography sx={{ fontSize: "0.82em", mr: "5px" }}>
                 View All
               </Typography>
