@@ -137,10 +137,6 @@ const Header = () => {
           }}
         >
           <img className="logo" src={websiteLogo} />
-          {/* <Container style={{ display: "flex", height: "1rem", width: "1rem" }}> */}
-          {/* <AdbIcon />
-            <Typography>Logo</Typography> */}
-          {/* </Container> */}
         </Grid>
 
         <Grid
