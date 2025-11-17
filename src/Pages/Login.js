@@ -177,7 +177,7 @@ const Login = () => {
               </span>
             </Link>
           </Typography>
-          <Typography>Or Continue with social account</Typography>
+          {/* <Typography>Or Continue with social account</Typography>
           <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
             <Avatar
               src={googleLogo}
@@ -197,7 +197,7 @@ const Login = () => {
                 )
               }
             />
-          </Box>
+          </Box> */}
         </Box>
       </Box>
       <img
