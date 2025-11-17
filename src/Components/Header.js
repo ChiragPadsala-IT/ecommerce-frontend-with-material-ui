@@ -30,6 +30,8 @@ import {
 import Logout from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import { logout } from "../redux/new/actions/userAction";
+import websiteLogo from "../Assets/Logos/website_logo.png";
+import "../CSS/header.css";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -134,10 +136,11 @@ const Header = () => {
             xs: 3,
           }}
         >
-          <Container style={{ display: "flex" }}>
-            <AdbIcon />
-            <Typography>Logo</Typography>
-          </Container>
+          <img className="logo" src={websiteLogo} />
+          {/* <Container style={{ display: "flex", height: "1rem", width: "1rem" }}> */}
+          {/* <AdbIcon />
+            <Typography>Logo</Typography> */}
+          {/* </Container> */}
         </Grid>
 
         <Grid
