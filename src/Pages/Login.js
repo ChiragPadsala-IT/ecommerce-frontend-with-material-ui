@@ -52,43 +52,43 @@ const Login = () => {
     e.preventDefault();
 
     console.log(userCredential);
-    // if (userCredential.email == "") {
-    //   setError((prev) => {
-    //     return { ...prev, email: "Email is required..." };
-    //   });
-    // } else if (!validator.isEmail(userCredential.email)) {
-    //   setError((prev) => {
-    //     return { ...prev, email: "Invalid email address..." };
-    //   });
-    // } else {
-    //   setError((prev) => {
-    //     return { ...prev, email: "" };
-    //   });
-    // }
+    if (userCredential.email == "") {
+      setError((prev) => {
+        return { ...prev, email: "Email is required..." };
+      });
+    } else if (!validator.isEmail(userCredential.email)) {
+      setError((prev) => {
+        return { ...prev, email: "Invalid email address..." };
+      });
+    } else {
+      setError((prev) => {
+        return { ...prev, email: "" };
+      });
+    }
 
-    // if (userCredential.password == "") {
-    //   setError((prev) => {
-    //     return { ...prev, password: "Password is required..." };
-    //   });
-    // } else if (userCredential.password.length < 10) {
-    //   setError((prev) => {
-    //     return {
-    //       ...prev,
-    //       password: "Password must be 10 or more characters...",
-    //     };
-    //   });
-    // } else {
-    //   setError((prev) => {
-    //     return { ...prev, password: "" };
-    //   });
+    if (userCredential.password == "") {
+      setError((prev) => {
+        return { ...prev, password: "Password is required..." };
+      });
+    } else if (userCredential.password.length < 10) {
+      setError((prev) => {
+        return {
+          ...prev,
+          password: "Password must be 10 or more characters...",
+        };
+      });
+    } else {
+      setError((prev) => {
+        return { ...prev, password: "" };
+      });
 
-    //   try {
-    //     dispatch(login(userCredential));
-    //   } catch (err) {
-    //     console.log("*******************************");
-    //     console.log(err);
-    //   }
-    // }
+      try {
+        dispatch(login(userCredential));
+      } catch (err) {
+        console.log("*******************************");
+        console.log(err);
+      }
+    }
   };
 
   return (
@@ -191,7 +191,7 @@ const Login = () => {
             <Avatar
               src={facebookLogo}
               sx={{ scale: 1, cursor: "pointer" }}
-              onClick={() =>
+              onClick={() =>  
                 alert(
                   "Facebook sign up is working process, so please use default way to login"
                 )
